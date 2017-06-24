@@ -8,13 +8,22 @@
     <%= javascript_include_tag 'devise', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="container">
-    <% if notice.present? %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% if alert.present? %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-    <%= yield %>
+  <body class="container text-center" style="padding-top: 200px">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+      <% if notice.present? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert.present? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>AfterLife - <%= resource.class.name %></h2>
+        </div>
+        <div class="panel-body">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
