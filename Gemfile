@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 gem 'devise', '~> 4.3.0'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 gem 'bootstrap-sass'
 
 gem 'jquery-rails'
