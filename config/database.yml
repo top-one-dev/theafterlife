@@ -17,13 +17,12 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
   url: postgres://gzpcbzyiletimx:612be8b6a3d8188618ce52e53320edb64cdac5eb6b741ba5fc63e62254b3636c@ec2-54-228-255-234.eu-west-1.compute.amazonaws.com:5432/d5m6rn0roe1ltq
+#  postgres://C8iIoU0mLUg5pMgb:s75o63dq939h3702wN7T@aatdgojqbkvbk.ctbk9nsehykb.us-east-1.rds.amazonaws.com:5432/ebdb
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,4 +79,8 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  database: <%= ENV["RDS_DB_NAME"] %>
+  username: <%= ENV["RDS_USERNAME"] %>
+  password: <%= ENV["RDS_PASSWORD"] %>
+  host: <%= ENV["RDS_HOSTNAME"] %>
+  port: <%= ENV["RDS_PORT"] %>
