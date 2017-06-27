@@ -88,7 +88,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV["APP_HOST"] }
 
   ActionMailer::Base.smtp_settings = {
-    :address => "smtp.mailgun.org"
+    :address => "smtp.mailgun.org",
     :domain  => "theafterlife.co",
     :port => 587,
     :user_name => "postmaster@theafterlife.co",
