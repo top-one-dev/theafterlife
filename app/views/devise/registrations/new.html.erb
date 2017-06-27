@@ -27,3 +27,5 @@
 <br/>
 <%= link_to "Forgot your password?", new_password_path(resource_name) %>
 <hr/>
+<%= link_to "Sign up with Facebook", omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-block btn-primary' %>
+<%= link_to "Sign up with Google Plus", omniauth_authorize_path(resource_name, :google_oauth2), class: 'btn btn-block btn-danger' %>
