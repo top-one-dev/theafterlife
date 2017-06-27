@@ -5,13 +5,21 @@ class Member < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.first_name
-      #user.image = auth.info.image 
-      user.skip_confirmation!
+    social_account = SocialAccount.find_by(provider: auth.provider, uid: auth.uid)
+    if social_account
+      social_account.member
+    else
+      member = Member.where(:email => auth.info.email).first_or_create do |member|
+        member.email = auth.info.email
+        member.password = Devise.friendly_token[0,20]
+        member.first_name = auth.info.first_name
+        member.last_name = auth.info.last_name
+        member.skip_confirmation!
+      end
+      if member.persisted?
+        member.social_accounts.create(:provider => auth.provider, :uid => auth.uid)
+      end
+      member
     end
-  end  
+  end
 end
