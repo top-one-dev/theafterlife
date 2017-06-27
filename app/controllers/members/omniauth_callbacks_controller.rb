@@ -1,12 +1,16 @@
 class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    @member = Member.from_omniauth(request.env["omniauth.auth"])
-    if @member.persisted?
-      sign_in_and_redirect @member, :event => :authentication
-      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+    if request.env["omniauth.auth"].info.email.blank?
+      redirect_to "/members/auth/facebook?auth_type=rerequest&scope=email"
     else
-      session["devise.facebook_data"] = request.env["omniauth.auth"]
-      redirect_to new_member_registration_url, alert: @member.errors.full_messages.join("\n")
+      @member = Member.from_omniauth(request.env["omniauth.auth"])
+      if @member.persisted?
+        sign_in_and_redirect @member, :event => :authentication
+        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      else
+        session["devise.facebook_data"] = request.env["omniauth.auth"]
+        redirect_to new_member_registration_url, alert: @member.errors.full_messages.join("\n")
+      end
     end
   end
 

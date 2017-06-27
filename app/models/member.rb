@@ -10,6 +10,7 @@ class Member < ApplicationRecord
     if social_account
       social_account.member
     else
+      puts auth.to_yaml
       member = Member.where(:email => auth.info.email).first_or_create do |member|
         member.email = auth.info.email
         member.password = Devise.friendly_token[0,20]
