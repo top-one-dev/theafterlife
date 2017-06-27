@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  has_many :social_accounts
   # Include default devise modules. Others available are:
   # :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
