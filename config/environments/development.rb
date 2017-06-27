@@ -54,4 +54,13 @@ Rails.application.configure do
 
   # Sets the default development url for Devise to generate proper email URLs
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.mailgun.org",
+    :domain  => "theafterlife.co",
+    :port => 587,
+    :user_name => "postmaster@theafterlife.co",
+    :password => "7b43fee786c31165fef30ea3f9bba88d",
+    :authentication => :login
+  }
 end
