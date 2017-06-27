@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  after_create :after_create
   has_many :social_accounts
   # Include default devise modules. Others available are:
   # :timeoutable
@@ -21,5 +22,11 @@ class Member < ApplicationRecord
       end
       member
     end
+  end
+
+  private
+
+  def after_create
+    MemberMailer.welcome(self).deliver_now
   end
 end

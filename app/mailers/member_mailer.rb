@@ -5,9 +5,8 @@ class MemberMailer < ApplicationMailer
   #
   #   en.member_mailer.welcome.subject
   #
-  def welcome
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def welcome(member)
+    @member = member
+    mail to: member.email, subject: "Welcome #{member.first_name}"  
   end
 end
