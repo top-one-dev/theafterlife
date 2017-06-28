@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  enabled: false
+  public: MyString
+  color_themes: MyString
+  ideal_funeral: MyString
+  music: MyString
+  flowers: MyString
+  food_drinks: MyString
+  reading: MyText
+  notes: MyText
+
+two:
+  member: two
+  enabled: false
+  public: MyString
+  color_themes: MyString
+  ideal_funeral: MyString
+  music: MyString
+  flowers: MyString
+  food_drinks: MyString
+  reading: MyText
+  notes: MyText

@@ -4,7 +4,8 @@ class Member < ApplicationRecord
   has_one :address, as: :addressable
   has_one :body
   has_one :transportation
-  
+  has_one :visitation
+  has_one :funeral_service
 
   has_many :people
   has_many :social_accounts
