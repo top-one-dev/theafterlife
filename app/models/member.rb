@@ -3,6 +3,8 @@ class Member < ApplicationRecord
   
   has_one :address, as: :addressable
   has_one :body
+  has_one :transportation
+  
 
   has_many :people
   has_many :social_accounts

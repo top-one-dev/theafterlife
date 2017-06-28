@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  transport_of_deceased: MyString
+  transport_of_family: MyString
+  notes: MyText
+
+two:
+  member: two
+  transport_of_deceased: MyString
+  transport_of_family: MyString
+  notes: MyText
