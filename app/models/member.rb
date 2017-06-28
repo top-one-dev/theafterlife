@@ -39,15 +39,14 @@ class Member < ApplicationRecord
     if social_account
       social_account.member
     else
-      puts auth.to_yaml
-      member = Member.where(:email => auth.info.email).first_or_create do |member|
+      member = Member.where(:email => auth.info.email).first_or_initialize do |member|
         member.email = auth.info.email
         member.password = Devise.friendly_token[0,20]
         member.first_name = auth.info.first_name
         member.last_name = auth.info.last_name
         member.skip_confirmation!
       end
-      if member.persisted?
+      if member.save
         member.social_accounts.create(:provider => auth.provider, :uid => auth.uid)
       end
       member

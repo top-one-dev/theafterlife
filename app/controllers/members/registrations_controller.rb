@@ -1,4 +1,12 @@
 class Members::RegistrationsController < Devise::RegistrationsController
+  def create
+    super
+    if session[:temporary_social_account].present?
+      SocialAccount.find(session[:temporary_social_account]).update(:member => resource)
+      session.delete(:temporary_social_account)
+    end
+  end
+
   private
 
   def sign_up_params
