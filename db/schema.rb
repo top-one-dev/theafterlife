@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628113911) do
+ActiveRecord::Schema.define(version: 20170628154515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,66 @@ ActiveRecord::Schema.define(version: 20170628113911) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+  end
+
+  create_table "bodies", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "donate_organs"
+    t.string "ceremony_type"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_bodies_on_member_id"
+  end
+
+  create_table "burial_services", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.string "plot"
+    t.boolean "symbolic_goodbye"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_burial_services_on_member_id"
+  end
+
+  create_table "cremations", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.string "ashes_disposition"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_cremations_on_member_id"
+  end
+
+  create_table "funeral_services", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.string "public"
+    t.string "color_themes"
+    t.string "ideal_funeral"
+    t.string "music"
+    t.string "flowers"
+    t.string "food_drinks"
+    t.text "reading"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_funeral_services_on_member_id"
+  end
+
+  create_table "headstones", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.text "epitaph"
+    t.boolean "individual"
+    t.string "material"
+    t.string "flower_vase"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_headstones_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -63,6 +123,45 @@ ActiveRecord::Schema.define(version: 20170628113911) do
     t.index ["unlock_token"], name: "index_members_on_unlock_token", unique: true
   end
 
+  create_table "memorial_contributions", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.string "sent_to"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_memorial_contributions_on_member_id"
+  end
+
+  create_table "memorial_markers", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.string "mm_type"
+    t.text "writing"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_memorial_markers_on_member_id"
+  end
+
+  create_table "obituaries", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.datetime "birth_day"
+    t.string "birth_place"
+    t.text "schools"
+    t.text "career"
+    t.text "activities"
+    t.text "remember_me_for"
+    t.text "other"
+    t.string "where_to_publish"
+    t.text "my_obituary"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_obituaries_on_member_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.bigint "member_id"
     t.string "name"
@@ -84,10 +183,65 @@ ActiveRecord::Schema.define(version: 20170628113911) do
     t.index ["role_id"], name: "index_person_roles_on_role_id"
   end
 
+  create_table "photo_galleries", force: :cascade do |t|
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_photo_galleries_on_member_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.bigint "member_id"
+    t.integer "imageable_id"
+    t.string "imageable_type"
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
+    t.index ["member_id"], name: "index_photos_on_member_id"
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "design"
+    t.text "text_on_cover"
+    t.text "words_i_want_to_included"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_programs_on_member_id"
+  end
+
+  create_table "receptions", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.text "food"
+    t.text "drink"
+    t.text "music"
+    t.text "flowers"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_receptions_on_member_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "science_donations", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.string "organization_name"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_science_donations_on_member_id"
   end
 
   create_table "social_accounts", force: :cascade do |t|
@@ -99,8 +253,43 @@ ActiveRecord::Schema.define(version: 20170628113911) do
     t.index ["member_id"], name: "index_social_accounts_on_member_id"
   end
 
+  create_table "transportations", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "transport_of_deceased"
+    t.string "transport_of_family"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_transportations_on_member_id"
+  end
+
+  create_table "visitations", force: :cascade do |t|
+    t.bigint "member_id"
+    t.boolean "enabled"
+    t.string "public"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_visitations_on_member_id"
+  end
+
+  add_foreign_key "bodies", "members"
+  add_foreign_key "burial_services", "members"
+  add_foreign_key "cremations", "members"
+  add_foreign_key "funeral_services", "members"
+  add_foreign_key "headstones", "members"
+  add_foreign_key "memorial_contributions", "members"
+  add_foreign_key "memorial_markers", "members"
+  add_foreign_key "obituaries", "members"
   add_foreign_key "people", "members"
   add_foreign_key "person_roles", "people"
   add_foreign_key "person_roles", "roles"
+  add_foreign_key "photo_galleries", "members"
+  add_foreign_key "photos", "members"
+  add_foreign_key "programs", "members"
+  add_foreign_key "receptions", "members"
+  add_foreign_key "science_donations", "members"
   add_foreign_key "social_accounts", "members"
+  add_foreign_key "transportations", "members"
+  add_foreign_key "visitations", "members"
 end
