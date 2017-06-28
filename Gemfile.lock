@@ -65,6 +65,11 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    dry_admin (0.1.3)
+      bootstrap-sass (~> 3.3)
+      rails (>= 4, < 6)
+      will_paginate (~> 3.1)
+      will_paginate-bootstrap (~> 1)
     erubi (1.6.1)
     execjs (2.7.0)
     faraday (0.12.1)
@@ -203,6 +208,9 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    will_paginate (3.1.6)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
@@ -212,6 +220,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise (~> 4.3.0)
+  dry_admin
   geocoder
   jbuilder (~> 2.5)
   jquery-rails
