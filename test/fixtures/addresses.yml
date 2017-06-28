@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  addressable_id: 1
+  addressable_type: MyString
+  name: MyString
+  address: MyString
+  street_number: MyString
+  route: MyString
+  neighborhood: MyString
+  sublocality: MyString
+  administrative_area_1: MyString
+  administrative_area_2: MyString
+  country: MyString
+  postal_code: MyString
+  latitude: 
+  longitude: 
+
+two:
+  addressable_id: 1
+  addressable_type: MyString
+  name: MyString
+  address: MyString
+  street_number: MyString
+  route: MyString
+  neighborhood: MyString
+  sublocality: MyString
+  administrative_area_1: MyString
+  administrative_area_2: MyString
+  country: MyString
+  postal_code: MyString
+  latitude: 
+  longitude: 
