@@ -17,6 +17,7 @@ gem 'devise', '~> 4.3.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'bootstrap-sass'
+gem 'paperclip'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
