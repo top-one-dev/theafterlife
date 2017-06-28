@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  enabled: false
+  ashes_disposition: MyString
+  notes: MyText
+
+two:
+  member: two
+  enabled: false
+  ashes_disposition: MyString
+  notes: MyText
