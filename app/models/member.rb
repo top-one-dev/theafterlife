@@ -27,7 +27,7 @@ class Member < ApplicationRecord
   has_many :sensitive_infos
 
   has_many :photos, through: :photo_gallery
-  has_many :files
+  has_many :member_files
 
   has_many :people
   has_many :social_accounts
