@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  enabled: false
+  plot: MyString
+  symbolic_goodbye: false
+  notes: MyText
+
+two:
+  member: two
+  enabled: false
+  plot: MyString
+  symbolic_goodbye: false
+  notes: MyText

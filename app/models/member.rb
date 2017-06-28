@@ -8,6 +8,7 @@ class Member < ApplicationRecord
   has_one :funeral_service
   has_one :cremation
   has_one :burial_service
+  has_one :science_donation
 
   has_many :people
   has_many :social_accounts
