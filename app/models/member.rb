@@ -2,6 +2,8 @@ class Member < ApplicationRecord
   after_create :after_create
   
   has_one :address, as: :addressable
+  has_one :body
+
   has_many :people
   has_many :social_accounts
 
