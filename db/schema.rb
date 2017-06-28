@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628154515) do
+ActiveRecord::Schema.define(version: 20170628164446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,28 @@ ActiveRecord::Schema.define(version: 20170628154515) do
     t.index ["member_id"], name: "index_headstones_on_member_id"
   end
 
+  create_table "letters", force: :cascade do |t|
+    t.bigint "member_id"
+    t.text "text"
+    t.date "date_of_creation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_letters_on_member_id"
+  end
+
+  create_table "member_files", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "name"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
+    t.index ["member_id"], name: "index_member_files_on_member_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -144,6 +166,27 @@ ActiveRecord::Schema.define(version: 20170628154515) do
     t.index ["member_id"], name: "index_memorial_markers_on_member_id"
   end
 
+  create_table "memories", force: :cascade do |t|
+    t.bigint "member_id"
+    t.integer "order"
+    t.string "heading"
+    t.text "text"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_memories_on_member_id"
+  end
+
+  create_table "musics", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "artist"
+    t.string "title"
+    t.text "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_musics_on_member_id"
+  end
+
   create_table "obituaries", force: :cascade do |t|
     t.bigint "member_id"
     t.boolean "enabled"
@@ -183,6 +226,15 @@ ActiveRecord::Schema.define(version: 20170628154515) do
     t.index ["role_id"], name: "index_person_roles_on_role_id"
   end
 
+  create_table "pets", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "name"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_pets_on_member_id"
+  end
+
   create_table "photo_galleries", force: :cascade do |t|
     t.bigint "member_id"
     t.datetime "created_at", null: false
@@ -204,6 +256,16 @@ ActiveRecord::Schema.define(version: 20170628154515) do
     t.index ["member_id"], name: "index_photos_on_member_id"
   end
 
+  create_table "possessions", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "what"
+    t.string "who"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_possessions_on_member_id"
+  end
+
   create_table "programs", force: :cascade do |t|
     t.bigint "member_id"
     t.string "design"
@@ -213,6 +275,22 @@ ActiveRecord::Schema.define(version: 20170628154515) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_programs_on_member_id"
+  end
+
+  create_table "questionnaires", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "question_id"
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_questionnaires_on_member_id"
+    t.index ["question_id"], name: "index_questionnaires_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "receptions", force: :cascade do |t|
@@ -244,6 +322,17 @@ ActiveRecord::Schema.define(version: 20170628154515) do
     t.index ["member_id"], name: "index_science_donations_on_member_id"
   end
 
+  create_table "sensitive_infos", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "info_type"
+    t.string "title"
+    t.string "instruction"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_sensitive_infos_on_member_id"
+  end
+
   create_table "social_accounts", force: :cascade do |t|
     t.bigint "member_id"
     t.string "provider"
@@ -273,23 +362,44 @@ ActiveRecord::Schema.define(version: 20170628154515) do
     t.index ["member_id"], name: "index_visitations_on_member_id"
   end
 
+  create_table "writings", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "author"
+    t.string "title"
+    t.text "text"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_writings_on_member_id"
+  end
+
   add_foreign_key "bodies", "members"
   add_foreign_key "burial_services", "members"
   add_foreign_key "cremations", "members"
   add_foreign_key "funeral_services", "members"
   add_foreign_key "headstones", "members"
+  add_foreign_key "letters", "members"
+  add_foreign_key "member_files", "members"
   add_foreign_key "memorial_contributions", "members"
   add_foreign_key "memorial_markers", "members"
+  add_foreign_key "memories", "members"
+  add_foreign_key "musics", "members"
   add_foreign_key "obituaries", "members"
   add_foreign_key "people", "members"
   add_foreign_key "person_roles", "people"
   add_foreign_key "person_roles", "roles"
+  add_foreign_key "pets", "members"
   add_foreign_key "photo_galleries", "members"
   add_foreign_key "photos", "members"
+  add_foreign_key "possessions", "members"
   add_foreign_key "programs", "members"
+  add_foreign_key "questionnaires", "members"
+  add_foreign_key "questionnaires", "questions"
   add_foreign_key "receptions", "members"
   add_foreign_key "science_donations", "members"
+  add_foreign_key "sensitive_infos", "members"
   add_foreign_key "social_accounts", "members"
   add_foreign_key "transportations", "members"
   add_foreign_key "visitations", "members"
+  add_foreign_key "writings", "members"
 end
