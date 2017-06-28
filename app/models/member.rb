@@ -13,6 +13,11 @@ class Member < ApplicationRecord
   has_one :memorial_contribution
   has_one :obituary
   has_one :memorial_marker
+  has_one :headstone
+  has_one :program
+  has_one :photo_gallery
+  
+  has_many :photos, through: :photo_gallery
 
   has_many :people
   has_many :social_accounts
