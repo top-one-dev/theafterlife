@@ -7,6 +7,7 @@ class Member < ApplicationRecord
   has_one :visitation
   has_one :funeral_service
   has_one :cremation
+  has_one :burial_service
 
   has_many :people
   has_many :social_accounts
