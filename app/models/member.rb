@@ -18,7 +18,16 @@ class Member < ApplicationRecord
   has_one :photo_gallery
 
   has_many :musics
+  has_many :writings
+  has_many :memories
+  has_many :questionnaires
+  has_many :pets
+  has_many :letters
+  has_many :possessions
+  has_many :sensitive_infos
+
   has_many :photos, through: :photo_gallery
+  has_many :files
 
   has_many :people
   has_many :social_accounts
