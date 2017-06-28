@@ -9,6 +9,10 @@ class Member < ApplicationRecord
   has_one :cremation
   has_one :burial_service
   has_one :science_donation
+  has_one :reception
+  has_one :memorial_contribution
+  has_one :obituary
+  has_one :memorial_marker
 
   has_many :people
   has_many :social_accounts

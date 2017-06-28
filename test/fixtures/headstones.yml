@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  enabled: false
+  epitaph: MyText
+  individual: false
+  material: MyString
+  flower_vase: MyString
+  notes: MyText
+
+two:
+  member: two
+  enabled: false
+  epitaph: MyText
+  individual: false
+  material: MyString
+  flower_vase: MyString
+  notes: MyText
