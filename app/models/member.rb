@@ -16,7 +16,8 @@ class Member < ApplicationRecord
   has_one :headstone
   has_one :program
   has_one :photo_gallery
-  
+
+  has_many :musics
   has_many :photos, through: :photo_gallery
 
   has_many :people
