@@ -56,11 +56,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   ActionMailer::Base.smtp_settings = {
-    :address => "smtp.mailgun.org",
-    :domain  => "theafterlife.co",
+    :address => "email-smtp.us-east-1.amazonaws.com",
     :port => 587,
-    :user_name => "postmaster@theafterlife.co",
-    :password => "7b43fee786c31165fef30ea3f9bba88d",
-    :authentication => :login
+    :user_name => ENV["SES_USERNAME"],
+    :password => ENV["SES_PASSWORD"],
+    :authentication => :login,
+    :enable_starttls_auto => true
   }
 end
