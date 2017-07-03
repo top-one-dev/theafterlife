@@ -1,23 +1,23 @@
 class Members::LastWishes::PossessionsController < Members::BaseController
   def index
-    @possessions = Possession.order('ID')
+    @possessions = current_member.possessions.order('ID')
   end
 
   def destroy
-    @possession = Possession.destroy(params[:id])
+    @possession = current_member.possessions.destroy(params[:id])
     redirect_to :action => :index, :notice => "Possession #{@possession.id} has been deleted"
   end
 
   def show
-    @possession = Possession.find(params[:id])
+    @possession = current_member.possessions.find(params[:id])
   end
 
   def new
-    @possession = Possession.new
+    @possession = current_member.possessions.new
   end
 
   def create
-    @possession = Possession.new(possession_params)
+    @possession = current_member.possessions.new(possession_params)
     if @possession.save
       redirect_to :action => :index, :notice => "Possession #{@possession.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::PossessionsController < Members::BaseController
   end
 
   def edit
-    @possession = Possession.find(params[:id])
+    @possession = current_member.possessions.find(params[:id])
   end
 
   def update
-    @possession = Possession.find(params[:id])
+    @possession = current_member.possessions.find(params[:id])
     if @possession.update(possession_params)
       redirect_to :action => :index, :notice => "Possession #{@possession.id} has been updated"
     else

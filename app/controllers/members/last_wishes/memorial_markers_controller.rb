@@ -1,23 +1,23 @@
 class Members::LastWishes::MemorialMarkersController < Members::BaseController
   def index
-    @memorial_markers = MemorialMarker.order('ID')
+    @memorial_markers = current_member.memorial_markers.order('ID')
   end
 
   def destroy
-    @memorial_marker = MemorialMarker.destroy(params[:id])
+    @memorial_marker = current_member.memorial_markers.destroy(params[:id])
     redirect_to :action => :index, :notice => "MemorialMarker #{@memorial_marker.id} has been deleted"
   end
 
   def show
-    @memorial_marker = MemorialMarker.find(params[:id])
+    @memorial_marker = current_member.memorial_markers.find(params[:id])
   end
 
   def new
-    @memorial_marker = MemorialMarker.new
+    @memorial_marker = current_member.memorial_markers.new
   end
 
   def create
-    @memorial_marker = MemorialMarker.new(memorial_marker_params)
+    @memorial_marker = current_member.memorial_markers.new(memorial_marker_params)
     if @memorial_marker.save
       redirect_to :action => :index, :notice => "MemorialMarker #{@memorial_marker.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::MemorialMarkersController < Members::BaseController
   end
 
   def edit
-    @memorial_marker = MemorialMarker.find(params[:id])
+    @memorial_marker = current_member.memorial_markers.find(params[:id])
   end
 
   def update
-    @memorial_marker = MemorialMarker.find(params[:id])
+    @memorial_marker = current_member.memorial_markers.find(params[:id])
     if @memorial_marker.update(memorial_marker_params)
       redirect_to :action => :index, :notice => "MemorialMarker #{@memorial_marker.id} has been updated"
     else

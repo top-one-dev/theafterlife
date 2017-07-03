@@ -1,23 +1,23 @@
 class Members::LastWishes::MusicsController < Members::BaseController
   def index
-    @musics = Music.order('ID')
+    @musics = current_member.musics.order('ID')
   end
 
   def destroy
-    @music = Music.destroy(params[:id])
+    @music = current_member.musics.destroy(params[:id])
     redirect_to :action => :index, :notice => "Music #{@music.id} has been deleted"
   end
 
   def show
-    @music = Music.find(params[:id])
+    @music = current_member.musics.find(params[:id])
   end
 
   def new
-    @music = Music.new
+    @music = current_member.musics.new
   end
 
   def create
-    @music = Music.new(music_params)
+    @music = current_member.musics.new(music_params)
     if @music.save
       redirect_to :action => :index, :notice => "Music #{@music.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::MusicsController < Members::BaseController
   end
 
   def edit
-    @music = Music.find(params[:id])
+    @music = current_member.musics.find(params[:id])
   end
 
   def update
-    @music = Music.find(params[:id])
+    @music = current_member.musics.find(params[:id])
     if @music.update(music_params)
       redirect_to :action => :index, :notice => "Music #{@music.id} has been updated"
     else

@@ -1,23 +1,23 @@
 class Members::LastWishes::LettersController < Members::BaseController
   def index
-    @letters = Letter.order('ID')
+    @letters = current_member.letters.order('ID')
   end
 
   def destroy
-    @letter = Letter.destroy(params[:id])
+    @letter = current_member.letters.destroy(params[:id])
     redirect_to :action => :index, :notice => "Letter #{@letter.id} has been deleted"
   end
 
   def show
-    @letter = Letter.find(params[:id])
+    @letter = current_member.letters.find(params[:id])
   end
 
   def new
-    @letter = Letter.new
+    @letter = current_member.letters.new
   end
 
   def create
-    @letter = Letter.new(letter_params)
+    @letter = current_member.letters.new(letter_params)
     if @letter.save
       redirect_to :action => :index, :notice => "Letter #{@letter.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::LettersController < Members::BaseController
   end
 
   def edit
-    @letter = Letter.find(params[:id])
+    @letter = current_member.letters.find(params[:id])
   end
 
   def update
-    @letter = Letter.find(params[:id])
+    @letter = current_member.letters.find(params[:id])
     if @letter.update(letter_params)
       redirect_to :action => :index, :notice => "Letter #{@letter.id} has been updated"
     else

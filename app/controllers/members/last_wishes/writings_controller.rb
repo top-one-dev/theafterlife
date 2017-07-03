@@ -1,23 +1,23 @@
 class Members::LastWishes::WritingsController < Members::BaseController
   def index
-    @writings = Writing.order('ID')
+    @writings = current_member.writings.order('ID')
   end
 
   def destroy
-    @writing = Writing.destroy(params[:id])
+    @writing = current_member.writings.destroy(params[:id])
     redirect_to :action => :index, :notice => "Writing #{@writing.id} has been deleted"
   end
 
   def show
-    @writing = Writing.find(params[:id])
+    @writing = current_member.writings.find(params[:id])
   end
 
   def new
-    @writing = Writing.new
+    @writing = current_member.writings.new
   end
 
   def create
-    @writing = Writing.new(writing_params)
+    @writing = current_member.writings.new(writing_params)
     if @writing.save
       redirect_to :action => :index, :notice => "Writing #{@writing.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::WritingsController < Members::BaseController
   end
 
   def edit
-    @writing = Writing.find(params[:id])
+    @writing = current_member.writings.find(params[:id])
   end
 
   def update
-    @writing = Writing.find(params[:id])
+    @writing = current_member.writings.find(params[:id])
     if @writing.update(writing_params)
       redirect_to :action => :index, :notice => "Writing #{@writing.id} has been updated"
     else

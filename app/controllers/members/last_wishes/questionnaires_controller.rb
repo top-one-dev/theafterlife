@@ -1,23 +1,23 @@
 class Members::LastWishes::QuestionnairesController < Members::BaseController
   def index
-    @questionnaires = Questionnaire.order('ID')
+    @questionnaires = current_member.questionnaires.order('ID')
   end
 
   def destroy
-    @questionnaire = Questionnaire.destroy(params[:id])
+    @questionnaire = current_member.questionnaires.destroy(params[:id])
     redirect_to :action => :index, :notice => "Questionnaire #{@questionnaire.id} has been deleted"
   end
 
   def show
-    @questionnaire = Questionnaire.find(params[:id])
+    @questionnaire = current_member.questionnaires.find(params[:id])
   end
 
   def new
-    @questionnaire = Questionnaire.new
+    @questionnaire = current_member.questionnaires.new
   end
 
   def create
-    @questionnaire = Questionnaire.new(questionnaire_params)
+    @questionnaire = current_member.questionnaires.new(questionnaire_params)
     if @questionnaire.save
       redirect_to :action => :index, :notice => "Questionnaire #{@questionnaire.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::QuestionnairesController < Members::BaseController
   end
 
   def edit
-    @questionnaire = Questionnaire.find(params[:id])
+    @questionnaire = current_member.questionnaires.find(params[:id])
   end
 
   def update
-    @questionnaire = Questionnaire.find(params[:id])
+    @questionnaire = current_member.questionnaires.find(params[:id])
     if @questionnaire.update(questionnaire_params)
       redirect_to :action => :index, :notice => "Questionnaire #{@questionnaire.id} has been updated"
     else

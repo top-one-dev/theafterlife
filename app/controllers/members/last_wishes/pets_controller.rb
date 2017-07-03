@@ -1,23 +1,23 @@
 class Members::LastWishes::PetsController < Members::BaseController
   def index
-    @pets = Pet.order('ID')
+    @pets = current_member.pets.order('ID')
   end
 
   def destroy
-    @pet = Pet.destroy(params[:id])
+    @pet = current_member.pets.destroy(params[:id])
     redirect_to :action => :index, :notice => "Pet #{@pet.id} has been deleted"
   end
 
   def show
-    @pet = Pet.find(params[:id])
+    @pet = current_member.pets.find(params[:id])
   end
 
   def new
-    @pet = Pet.new
+    @pet = current_member.pets.new
   end
 
   def create
-    @pet = Pet.new(pet_params)
+    @pet = current_member.pets.new(pet_params)
     if @pet.save
       redirect_to :action => :index, :notice => "Pet #{@pet.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::PetsController < Members::BaseController
   end
 
   def edit
-    @pet = Pet.find(params[:id])
+    @pet = current_member.pets.find(params[:id])
   end
 
   def update
-    @pet = Pet.find(params[:id])
+    @pet = current_member.pets.find(params[:id])
     if @pet.update(pet_params)
       redirect_to :action => :index, :notice => "Pet #{@pet.id} has been updated"
     else

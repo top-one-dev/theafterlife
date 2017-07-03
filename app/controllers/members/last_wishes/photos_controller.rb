@@ -1,23 +1,23 @@
 class Members::LastWishes::PhotosController < Members::BaseController
   def index
-    @photos = Photo.order('ID')
+    @photos = current_member.photos.order('ID')
   end
 
   def destroy
-    @photo = Photo.destroy(params[:id])
+    @photo = current_member.photos.destroy(params[:id])
     redirect_to :action => :index, :notice => "Photo #{@photo.id} has been deleted"
   end
 
   def show
-    @photo = Photo.find(params[:id])
+    @photo = current_member.photos.find(params[:id])
   end
 
   def new
-    @photo = Photo.new
+    @photo = current_member.photos.new
   end
 
   def create
-    @photo = Photo.new(photo_params)
+    @photo = current_member.photos.new(photo_params)
     if @photo.save
       redirect_to :action => :index, :notice => "Photo #{@photo.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::PhotosController < Members::BaseController
   end
 
   def edit
-    @photo = Photo.find(params[:id])
+    @photo = current_member.photos.find(params[:id])
   end
 
   def update
-    @photo = Photo.find(params[:id])
+    @photo = current_member.photos.find(params[:id])
     if @photo.update(photo_params)
       redirect_to :action => :index, :notice => "Photo #{@photo.id} has been updated"
     else

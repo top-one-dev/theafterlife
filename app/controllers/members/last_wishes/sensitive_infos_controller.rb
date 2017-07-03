@@ -1,23 +1,23 @@
 class Members::LastWishes::SensitiveInfosController < Members::BaseController
   def index
-    @sensitive_infos = SensitiveInfo.order('ID')
+    @sensitive_infos = current_member.sensitive_infos.order('ID')
   end
 
   def destroy
-    @sensitive_info = SensitiveInfo.destroy(params[:id])
+    @sensitive_info = current_member.sensitive_infos.destroy(params[:id])
     redirect_to :action => :index, :notice => "SensitiveInfo #{@sensitive_info.id} has been deleted"
   end
 
   def show
-    @sensitive_info = SensitiveInfo.find(params[:id])
+    @sensitive_info = current_member.sensitive_infos.find(params[:id])
   end
 
   def new
-    @sensitive_info = SensitiveInfo.new
+    @sensitive_info = current_member.sensitive_infos.new
   end
 
   def create
-    @sensitive_info = SensitiveInfo.new(sensitive_info_params)
+    @sensitive_info = current_member.sensitive_infos.new(sensitive_info_params)
     if @sensitive_info.save
       redirect_to :action => :index, :notice => "SensitiveInfo #{@sensitive_info.id} has been saved"
     else
@@ -27,11 +27,11 @@ class Members::LastWishes::SensitiveInfosController < Members::BaseController
   end
 
   def edit
-    @sensitive_info = SensitiveInfo.find(params[:id])
+    @sensitive_info = current_member.sensitive_infos.find(params[:id])
   end
 
   def update
-    @sensitive_info = SensitiveInfo.find(params[:id])
+    @sensitive_info = current_member.sensitive_infos.find(params[:id])
     if @sensitive_info.update(sensitive_info_params)
       redirect_to :action => :index, :notice => "SensitiveInfo #{@sensitive_info.id} has been updated"
     else
