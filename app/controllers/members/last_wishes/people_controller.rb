@@ -1,11 +1,11 @@
 class Members::LastWishes::PeopleController < Members::BaseController
   def index
-    @persons = Person.order('ID')
+    @people = Person.order('ID')
   end
 
   def destroy
     @person = Person.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Person #{@person.name} has been deleted"
+    redirect_to :action => :index, :notice => "Person #{@person.id} has been deleted"
   end
 
   def show
@@ -19,7 +19,7 @@ class Members::LastWishes::PeopleController < Members::BaseController
   def create
     @person = Person.new(person_params)
     if @person.save
-      redirect_to :action => :index, :notice => "Person #{@person.name} has been saved"
+      redirect_to :action => :index, :notice => "Person #{@person.id} has been saved"
     else
       flash[:alert] = @person.errors.full_messages.join(', ')
       render 'new'
@@ -33,7 +33,7 @@ class Members::LastWishes::PeopleController < Members::BaseController
   def update
     @person = Person.find(params[:id])
     if @person.update(person_params)
-      redirect_to :action => :index, :notice => "Person #{@person.name} has been updated"
+      redirect_to :action => :index, :notice => "Person #{@person.id} has been updated"
     else
       flash[:alert] = @person.errors.full_messages.join(', ')
       render 'edit'
