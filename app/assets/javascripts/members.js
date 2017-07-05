@@ -13,5 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.inview.min
+//= require wow.min
+//= require mousescroll
+//= require smoothscroll
+//= require jquery.countTo
+//= require lightbox.min
+//= require jquery.flexslider
+//= require main
 //= require bootstrap
-//= require_tree .
