@@ -1,0 +1,64 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= link_to members_last_wishes_people_path, :remote => true, :id => "people_link" do %>
+          <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
+          My People
+        <% end %>
+        <span class="accordion_preloader" id="people_preloader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </span>
+      </h4>
+    </div>
+    <div id="people_panel" class="panel-collapse collapse">
+      <div class="panel-body"></div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= link_to members_last_wishes_pets_path, :remote => true, :id => "pets_link" do %>
+          <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
+          My Pets
+        <% end %>
+        <span class="accordion_preloader" id="pets_preloader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </span>                      
+      </h4>
+    </div>
+    <div id="pets_panel" class="panel-collapse collapse">
+      <div class="panel-body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+  var timeout;
+
+  $('#people_link').on('click', function(){
+    if($('#people_panel .panel-body').is(':hidden')) {
+      $('#people_preloader').show();
+    }
+  });
+
+  $('#people_panel').on('shown.bs.collapse', function(){
+    $('#people_preloader').hide();
+  });
+
+  $('#pets_link').on('click', function(){
+    if($('#pets_panel .panel-body').is(':hidden')) {
+      $('#pets_preloader').show();
+    }
+  });
+
+  $('#pets_panel').on('shown.bs.collapse', function(){
+    $('#pets_preloader').hide();
+  });
+
+
+});
+</script>

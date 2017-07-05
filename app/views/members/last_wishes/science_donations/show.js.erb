@@ -1,0 +1,7 @@
+if($('#science_donation_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#science_donation_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#science_donation_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#science_donation_panel').collapse('toggle');

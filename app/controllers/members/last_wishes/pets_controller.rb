@@ -5,7 +5,7 @@ class Members::LastWishes::PetsController < Members::BaseController
 
   def destroy
     @pet = current_member.pets.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Pet #{@pet.id} has been deleted"
+    @pets = current_member.pets.order('ID')
   end
 
   def show
@@ -19,10 +19,9 @@ class Members::LastWishes::PetsController < Members::BaseController
   def create
     @pet = current_member.pets.new(pet_params)
     if @pet.save
-      redirect_to :action => :index, :notice => "Pet #{@pet.id} has been saved"
+      @pets = current_member.pets.order('ID')
     else
-      flash[:alert] = @pet.errors.full_messages.join(', ')
-      render 'new'
+      @error = @person.errors.full_messages.join(', ')
     end
   end
 
@@ -33,16 +32,15 @@ class Members::LastWishes::PetsController < Members::BaseController
   def update
     @pet = current_member.pets.find(params[:id])
     if @pet.update(pet_params)
-      redirect_to :action => :index, :notice => "Pet #{@pet.id} has been updated"
+      @pets = current_member.pets.order('ID')
     else
-      flash[:alert] = @pet.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @person.errors.full_messages.join(', ')
     end
   end
 
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:pet).permit(:name, :notes)
   end
 end

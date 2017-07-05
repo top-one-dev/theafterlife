@@ -1,0 +1,7 @@
+if($('#pets_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#pets_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#pets_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#pets_panel').collapse('toggle');

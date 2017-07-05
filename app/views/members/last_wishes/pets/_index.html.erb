@@ -1,0 +1,39 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @pets.each do |pet| %>
+      <tr>
+        <td><%= pet.name %></td>
+        <td><%= pet.notes %></td>
+        <td class="text-right">
+          <%= link_to icon('edit'), edit_members_last_wishes_pet_path(pet), :remote => true %>
+          <%= link_to icon('trash-o'), members_last_wishes_pet_path(pet), :method => :delete, :remote => true, :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="5" class="text-center">
+          <em>You haven't added any pet yet</em>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "Add New Pet", new_members_last_wishes_pet_path, :class => "btn btn-success", :remote => "true" %>
+<!-- Modal -->
+<div id="new_pet_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" id="new_pet_modal_content">
+      
+    </div>
+
+  </div>
+</div>

@@ -22,3 +22,4 @@
 //= require jquery.flexslider
 //= require main
 //= require bootstrap
+//= require jquery.growl

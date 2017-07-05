@@ -5,7 +5,7 @@ class Members::LastWishes::PeopleController < Members::BaseController
 
   def destroy
     @person = current_member.people.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Person #{@person.id} has been deleted"
+    @people = current_member.people.order('ID')
   end
 
   def show
@@ -19,10 +19,9 @@ class Members::LastWishes::PeopleController < Members::BaseController
   def create
     @person = current_member.people.new(person_params)
     if @person.save
-      redirect_to :action => :index, :notice => "Person #{@person.id} has been saved"
+      @people = current_member.people.order('ID')
     else
-      flash[:alert] = @person.errors.full_messages.join(', ')
-      render 'new'
+      @error = @person.errors.full_messages.join(', ')
     end
   end
 
@@ -33,10 +32,9 @@ class Members::LastWishes::PeopleController < Members::BaseController
   def update
     @person = current_member.people.find(params[:id])
     if @person.update(person_params)
-      redirect_to :action => :index, :notice => "Person #{@person.id} has been updated"
+      @people = current_member.people.order('ID')
     else
-      flash[:alert] = @person.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @person.errors.full_messages.join(', ')
     end
   end
 

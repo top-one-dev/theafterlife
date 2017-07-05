@@ -1,0 +1,45 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Relation</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @people.each do |person| %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.email %></td>
+        <td><%= person.phone %></td>
+        <td><%= person.relation %></td>
+        <td><%= person.notes %></td>
+        <td class="text-right">
+          <%= link_to icon('edit'), edit_members_last_wishes_person_path(person), :remote => true %>
+          <%= link_to icon('trash-o'), members_last_wishes_person_path(person), :method => :delete, :remote => true, :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="5" class="text-center">
+          <em>You haven't added any person yet</em>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "Add New Person", new_members_last_wishes_person_path, :class => "btn btn-success", :remote => "true" %>
+<!-- Modal -->
+<div id="new_person_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" id="new_person_modal_content">
+      
+    </div>
+
+  </div>
+</div>

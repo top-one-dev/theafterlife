@@ -1,0 +1,9 @@
+<% if @error.present? %>
+  $.growl.error({ title: 'Error!', message: "<%= j @error %>" });
+<% else %>
+  $.growl.notice({ title: 'Success!', message: "<%= @person.name %> has been updated" });
+  $('#new_person_modal').modal('hide');
+  $('#new_person_modal').on('hidden.bs.modal', function (e) {
+    $('#people_panel .panel-body').html('<%= j render :partial =>"index" %>');
+  })
+<% end %>

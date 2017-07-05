@@ -5,4 +5,6 @@ class Person < ApplicationRecord
 
   has_many :person_roles
   has_many :roles, through: :person_roles
+
+  validates_presence_of :name
 end

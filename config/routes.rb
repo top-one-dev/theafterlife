@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     root 'dashboards#index'
 
     namespace :last_wishes do
-      root :to => redirect('relationships')
+      root :to => redirect('members/last_wishes/relationships')
       get 'relationships' => 'dashboards#relationships'
       get 'body' => 'dashboards#body'
       get 'possessions' => 'dashboards#possessions'

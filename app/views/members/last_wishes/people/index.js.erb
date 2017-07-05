@@ -1,0 +1,7 @@
+if($('#people_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#people_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#people_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#people_panel').collapse('toggle');

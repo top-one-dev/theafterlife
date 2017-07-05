@@ -20,6 +20,7 @@ gem 'bootstrap-sass'
 gem 'paperclip'
 
 gem 'jquery-rails'
+gem 'jquery-growl-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'geocoder'
