@@ -8,7 +8,17 @@ Rails.application.routes.draw do
 
   namespace :members do
     root 'dashboards#index'
+
     namespace :last_wishes do
+      root :to => redirect('relationships')
+      get 'relationships' => 'dashboards#relationships'
+      get 'body' => 'dashboards#body'
+      get 'possessions' => 'dashboards#possessions'
+      get 'funeral' => 'dashboards#funeral'
+      get 'story' => 'dashboards#story'
+      get 'files' => 'dashboards#files'
+      get 'sensitive_info' => 'dashboards#sensitive_info'
+
       resources :people
       resources :pets
       resources :possessions
