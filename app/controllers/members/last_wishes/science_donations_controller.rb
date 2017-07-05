@@ -23,7 +23,7 @@ class Members::LastWishes::ScienceDonationsController < Members::BaseController
 
   def create_if_not_exist
     if current_member.science_donation.nil?
-      current_member.science_donation.create
+      current_member.create_science_donation
     end
   end
 

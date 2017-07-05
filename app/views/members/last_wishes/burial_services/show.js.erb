@@ -1,0 +1,7 @@
+if($('#burial_service_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#burial_service_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#burial_service_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#burial_service_panel').collapse('toggle');

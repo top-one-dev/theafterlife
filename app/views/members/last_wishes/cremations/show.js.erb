@@ -1,0 +1,7 @@
+if($('#cremation_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#cremation_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#cremation_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#cremation_panel').collapse('toggle');

@@ -23,7 +23,7 @@ class Members::LastWishes::BurialServicesController < Members::BaseController
 
   def create_if_not_exist
     if current_member.burial_service.nil?
-      current_member.burial_service.create
+      current_member.create_burial_service
     end
   end
 
