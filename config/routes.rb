@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'health' => 'pages#health'
 
   namespace :members do
-    root 'dashboards#index'
+    root :to => redirect('members/last_wishes/relationships')
 
     namespace :last_wishes do
       root :to => redirect('members/last_wishes/relationships')
