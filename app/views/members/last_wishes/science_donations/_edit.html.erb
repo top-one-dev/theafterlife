@@ -1,0 +1,15 @@
+<%= form_for [:members, :last_wishes, @science_donation], :remote => true do |f| %>
+      <div class="form-group">
+        <%= f.label :organization_name %>
+        <%= f.text_field :organization_name, :class => 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, :class => 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :notes %>
+        <%= f.text_area :notes, :class => 'form-control' %>
+      </div>
+      <%= f.submit :class => 'btn btn-success' %>
+<% end %>

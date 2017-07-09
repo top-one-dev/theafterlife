@@ -1,23 +1,19 @@
 <%= form_for [:members, :last_wishes, @pet], :remote => true do |f| %>
-  <div>
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">New Pet</h4>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, :class => 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= f.label :notes %>
-          <%= f.text_area :notes, :class => 'form-control' %>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <%= f.submit :class => 'btn btn-success' %>
-    </div>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">New Pet</h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :class => 'form-control' %>
   </div>
+  <div class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+</div>
+<div class="modal-footer">
+  <%= f.submit :class => 'btn btn-success' %>
+</div>
 <% end %>
