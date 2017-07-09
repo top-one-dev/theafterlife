@@ -44,5 +44,11 @@ Rails.application.routes.draw do
       resource :visitation, :only => [:show, :edit, :update]
       resource :obituary, :only => [:show, :edit, :update]
     end
+
+    namespace :save do
+      resources :deposits do 
+        post 'pay'
+      end
+    end
   end
 end
