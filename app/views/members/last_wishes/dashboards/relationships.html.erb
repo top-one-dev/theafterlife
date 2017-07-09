@@ -62,3 +62,14 @@ $(function() {
 
 });
 </script>
+
+<%= form_tag members_save_deposit_pay_path(1) do %>
+<script src="https://checkout.stripe.com/v2/checkout.js"
+        class="stripe-button"
+        data-label="Pay with Card"
+        data-email="<%= current_member.email %>"
+        data-key="pk_test_VRJUiXVBlCzsORnzVn4S6x4D"
+        data-description="Payment"
+        data-amount="1000">
+</script>
+<% end %>
