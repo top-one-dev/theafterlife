@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_movement: one
+  error_type: MyString
+  error_description: MyString
+
+two:
+  account_movement: two
+  error_type: MyString
+  error_description: MyString
