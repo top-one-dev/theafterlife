@@ -1,0 +1,28 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>
+        Date
+      </th>
+      <th>
+        Deposit ID
+      </th>
+      <th>
+        Status
+      </th>
+      <th>
+        Amount
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @current_user.deposits.order('id').each do |deposit| %>
+    <tr>
+      <td><%= deposit.created_at.to_formatted_s(:long) %></td>
+      <td><%= deposit.uuid %></td>
+      <td><%= deposit.status %></td>
+      <td><%= number_to_currency(deposit.amount) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
