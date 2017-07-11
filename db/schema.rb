@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628164446) do
+ActiveRecord::Schema.define(version: 20170711184732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_movements", force: :cascade do |t|
+    t.bigint "member_id"
+    t.decimal "amount", precision: 30, scale: 8
+    t.decimal "confirmed_amount", precision: 30, scale: 8
+    t.datetime "paid_at"
+    t.string "uuid"
+    t.string "payment_type"
+    t.string "payment_identificator"
+    t.string "payment_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_account_movements_on_member_id"
+    t.index ["uuid"], name: "index_account_movements_on_uuid"
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.integer "addressable_id"
@@ -205,6 +220,26 @@ ActiveRecord::Schema.define(version: 20170628164446) do
     t.index ["member_id"], name: "index_obituaries_on_member_id"
   end
 
+  create_table "payment_errors", force: :cascade do |t|
+    t.bigint "account_movement_id"
+    t.string "error_type"
+    t.string "error_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_movement_id"], name: "index_payment_errors_on_account_movement_id"
+  end
+
+  create_table "payment_plans", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "interval"
+    t.decimal "amount", precision: 30, scale: 8
+    t.datetime "started_at"
+    t.datetime "cancelled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_payment_plans_on_member_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.bigint "member_id"
     t.string "name"
@@ -373,6 +408,7 @@ ActiveRecord::Schema.define(version: 20170628164446) do
     t.index ["member_id"], name: "index_writings_on_member_id"
   end
 
+  add_foreign_key "account_movements", "members"
   add_foreign_key "bodies", "members"
   add_foreign_key "burial_services", "members"
   add_foreign_key "cremations", "members"
@@ -385,6 +421,8 @@ ActiveRecord::Schema.define(version: 20170628164446) do
   add_foreign_key "memories", "members"
   add_foreign_key "musics", "members"
   add_foreign_key "obituaries", "members"
+  add_foreign_key "payment_errors", "account_movements"
+  add_foreign_key "payment_plans", "members"
   add_foreign_key "people", "members"
   add_foreign_key "person_roles", "people"
   add_foreign_key "person_roles", "roles"

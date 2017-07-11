@@ -32,6 +32,9 @@ class Member < ApplicationRecord
   has_many :people
   has_many :social_accounts
 
+  has_many :account_movements
+  has_many :payment_plans
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
   def self.from_omniauth(auth)
@@ -51,6 +54,10 @@ class Member < ApplicationRecord
       end
       member
     end
+  end
+
+  def current_payment_plan
+    self.payment_plans.where('started_at <= ? AND cancelled_at >= ?', Time.now, Time.now).first
   end
 
   private

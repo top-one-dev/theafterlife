@@ -46,7 +46,11 @@ Rails.application.routes.draw do
     end
 
     namespace :save do
-      resources :deposits do 
+      resources :deposits, :except => [:edit, :update] do 
+        post 'pay'
+      end
+      resources :plans, :only => [:new, :create] do
+        get 'cancel'
         post 'pay'
       end
     end

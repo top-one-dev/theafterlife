@@ -1,28 +1,65 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>
-        Date
-      </th>
-      <th>
-        Deposit ID
-      </th>
-      <th>
-        Status
-      </th>
-      <th>
-        Amount
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @current_user.deposits.order('id').each do |deposit| %>
-    <tr>
-      <td><%= deposit.created_at.to_formatted_s(:long) %></td>
-      <td><%= deposit.uuid %></td>
-      <td><%= deposit.status %></td>
-      <td><%= number_to_currency(deposit.amount) %></td>
-    </tr>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    Deposits
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>
+            Date
+          </th>
+          <th>
+            Deposit ID
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Amount
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @deposits.order('id').each do |deposit| %>
+        <tr>
+          <td><%= deposit.created_at.to_formatted_s(:long) %></td>
+          <td><%= deposit.uuid %></td>
+          <td><%= deposit.payment_status.capitalize %></td>
+          <td><%= number_to_currency(deposit.amount) %></td>
+          <td>
+            <% if deposit.payment_status == "pending" %>
+              <%= link_to 'Delete', members_save_deposit_path(deposit), :method => :delete, :class => 'btn btn-danger', :data => {:confirm => 'Are you sure?'} %>
+              <%= form_tag members_save_deposit_pay_path(deposit), :style => "display: inline-block" do |f| %>
+                <script
+                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="pk_test_VRJUiXVBlCzsORnzVn4S6x4D"
+                  data-amount="<%= deposit.amount * 100 %>"
+                  data-name="The Afterlife LLC"
+                  data-email="<%= current_member.email %>"
+                  data-description="One time deposit (<%= deposit.created_at.to_date %>)"
+                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                  data-locale="auto">
+                </script>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+        <% end.empty? %>
+        <tr>
+          <td colspan="4" class="text-center">
+            <em>No deposits yet</em>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'New one time deposit', new_members_save_deposit_path, :class => 'btn btn-success' %>
+    <% if @current_payment_plan.nil? %>
+      <%= link_to 'New recurring deposit', new_members_save_plan_path, :class => 'btn btn-success' %>
+    <% else %>
+      <br/>
+      You have recurring deposit plan set up: <strong><%= @current_payment_plan.amount %> USD every <%= @current_payment_plan.interval %></strong>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
