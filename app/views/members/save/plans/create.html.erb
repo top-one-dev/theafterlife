@@ -1,0 +1,26 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    Confirm your recurring deposit
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Amount</dt>
+      <dd><%= number_to_currency(@plan.amount) %></dd>
+
+      <dt>Interval</dt>
+      <dd><%= @plan.interval %></dd>
+    </dl>
+    <%= form_for(@plan, :url => members_save_plan_pay_path(@plan), :method => :post) do |f| %>
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_VRJUiXVBlCzsORnzVn4S6x4D"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-name="The Afterlife LLC"
+        data-description="Recurring deposit (<%= number_to_currency(@plan.amount) %> per <%= @plan.interval %>)"
+        data-email="<%= current_member.email %>"
+        data-amount="<%= @plan.amount * 100 %>"
+        data-label="Confirm recurring payment">
+      </script>
+    <% end %>
+  </div>
+</div>

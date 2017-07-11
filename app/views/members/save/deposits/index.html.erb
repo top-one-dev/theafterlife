@@ -58,8 +58,9 @@
     <% if @current_payment_plan.nil? %>
       <%= link_to 'New recurring deposit', new_members_save_plan_path, :class => 'btn btn-success' %>
     <% else %>
-      <br/>
-      You have recurring deposit plan set up: <strong><%= @current_payment_plan.amount %> USD every <%= @current_payment_plan.interval %></strong>
+      <br/><br/>
+      Your current deposit plan: <strong><%= @current_payment_plan.amount %> USD every <%= @current_payment_plan.interval %></strong>
+      <%= link_to "Cancel current plan", members_save_plan_cancel_path(@current_payment_plan), :class => 'btn btn-danger', :data => {:confirm => "Do you really want to cancel your recurring deposits?"} %>
     <% end %>
   </div>
 </div>

@@ -57,7 +57,7 @@ class Member < ApplicationRecord
   end
 
   def current_payment_plan
-    self.payment_plans.where('started_at <= ? AND cancelled_at >= ?', Time.now, Time.now).first
+    self.payment_plans.where('started_at <= ? AND cancelled_at IS NULL', Time.now).first
   end
 
   private
