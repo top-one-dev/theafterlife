@@ -55,4 +55,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :webhooks do
+    collection do
+      post 'stripe' => 'webhooks#stripe'
+    end
+  end
 end
