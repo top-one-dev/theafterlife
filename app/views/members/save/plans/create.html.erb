@@ -1,6 +1,6 @@
 <div class="panel panel-success">
   <div class="panel-heading">
-    Confirm your recurring deposit
+    Confirm your deposit plan
   </div>
   <div class="panel-body">
     <dl class="dl-horizontal">
@@ -19,7 +19,7 @@
         data-description="Recurring deposit (<%= number_to_currency(@plan.amount) %> per <%= @plan.interval %>)"
         data-email="<%= current_member.email %>"
         data-amount="<%= @plan.amount * 100 %>"
-        data-label="Confirm recurring payment">
+        data-label="Confirm deposit plan">
       </script>
     <% end %>
   </div>
