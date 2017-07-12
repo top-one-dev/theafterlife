@@ -11,19 +11,17 @@ class WebhooksController < ApplicationController
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
     rescue JSON::ParserError => e
       # Invalid payload
-      render :nothing => true, :status => 400
-      return
+      render :nothing => true, :status => 400 and return
     rescue Stripe::SignatureVerificationError => e
       # Invalid signature
-      render :nothing => true, :status => 400
-      return
+      render :nothing => true, :status => 400 and return
     end
 
     case params['type']
     when 'invoice.payment_succeeded'
       stripe_invoice_payment_succeeded
     end
-    render :nothing => true, :status => 200
+    render :nothing => true, :status => 200 and return
   end
 
   def stripe_invoice_payment_succeeded
