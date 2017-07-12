@@ -39,32 +39,19 @@ class Members::Save::DepositsController < Members::BaseController
       @deposit.update(:confirmed_amount => @deposit.amount * 100, :paid_at => Time.now, :payment_type => 'stripe', :payment_identificator => charge.id, :payment_status => 'paid')
       redirect_to members_save_deposits_path, :notice => "Deposit successfully paid, thank you" and return
     rescue Stripe::CardError => e
-      # Since it's a decline, Stripe::CardError will be caught
-      body = e.json_body
-      err  = body[:error]
-
-      puts "Status is: #{e.http_status}"
-      puts "Type is: #{err[:type]}"
-      puts "Charge ID is: #{err[:charge]}"
-      # The following fields are optional
-      puts "Code is: #{err[:code]}" if err[:code]
-      puts "Decline code is: #{err[:decline_code]}" if err[:decline_code]
-      puts "Param is: #{err[:param]}" if err[:param]
-      puts "Message is: #{err[:message]}" if err[:message]
+      @deposit.payment_errors.create(:error_type => 'CardError', :error_description => (e.json_body[:error][:message] if e.json_body[:error][:message].present?))
     rescue Stripe::RateLimitError => e
-      # Too many requests made to the API too quickly
+      @deposit.payment_errors.create(:error_type => 'RateLimitError', :error_description => (e.json_body[:error][:message] if e.json_body[:error][:message].present?))
     rescue Stripe::InvalidRequestError => e
-      puts e.inspect
+      @deposit.payment_errors.create(:error_type => 'InvalidRequestError', :error_description => (e.json_body[:error][:message] if e.json_body[:error][:message].present?))
     rescue Stripe::AuthenticationError => e
-      # Authentication with Stripe's API failed
-      # (maybe you changed API keys recently)
+      @deposit.payment_errors.create(:error_type => 'AuthenticationError', :error_description => (e.json_body[:error][:message] if e.json_body[:error][:message].present?))
     rescue Stripe::APIConnectionError => e
-      # Network communication with Stripe failed
+      @deposit.payment_errors.create(:error_type => 'APIConnectionError', :error_description => (e.json_body[:error][:message] if e.json_body[:error][:message].present?))
     rescue Stripe::StripeError => e
-      # Display a very generic error to the user, and maybe send
-      # yourself an email
+      @deposit.payment_errors.create(:error_type => 'StripeError', :error_description => (e.json_body[:error][:message] if e.json_body[:error][:message].present?))
     rescue => e
-      # Something else happened, completely unrelated to Stripe
+      @deposit.payment_errors.create(:error_type => 'Error', :error_description => e.inspect.to_s)
     end 
     redirect_to members_save_deposits_path, :alert => "Something went wrong" and return
   end
