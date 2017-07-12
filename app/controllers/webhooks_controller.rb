@@ -19,12 +19,25 @@ class WebhooksController < ApplicationController
 
     case params['type']
     when 'invoice.payment_succeeded'
-      stripe_invoice_payment_succeeded
+      stripe_invoice_payment_succeeded(params)
     end
     render :plain => "", :status => 200 and return
   end
 
-  def stripe_invoice_payment_succeeded
-    puts 'stripe_invoice_payment_succeeded'
+  def stripe_invoice_payment_succeeded(params)
+    object = params['data']['object']
+    member = Member.find_by_stripe_customer_id(object['customer'])
+    if member.present?
+      account_movement = member.account_movements.new
+      account_movement.amount = object['lines']['data'][0]['amount']
+      account_movement.confirmed_amount = account_movement.amount
+      account_movement.paid_at = Time.now
+      account_movement.payment_type = 'stripe'
+      account_movement.payment_identificator = object['id']
+      account_movement.payment_status = 'paid'
+      account_movement.save
+    else
+      puts 'Member not found'
+    end
   end
 end
