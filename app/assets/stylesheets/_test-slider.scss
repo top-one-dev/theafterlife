@@ -224,7 +224,7 @@ html[xmlns] .flexslider .slides {
   background: rgba(0, 0, 0, 0.7);
 }
 .flex-control-paging li a.flex-active {
-  background: #000;
+  background: #7c77b9;
   background: rgba(0, 0, 0, 0.9);
   cursor: default;
 }
@@ -272,9 +272,7 @@ html[xmlns] .flexslider .slides {
   text-align:center;
   padding:0px;
   font-size:30px;
-  color:#434a54;
-  /*font-family: 'Roboto Slab', serif;*/
-  background-image: url(../images/test/test-b.png), url(../images/test/test-a.png);
+  background-image: asset-url('test/test-b.png'), asset-url('test/test-a.png');
   background-repeat: no-repeat, no-repeat;
   background-position: left 75px top 22px, right 75px top 22px;
 }
@@ -290,14 +288,14 @@ html[xmlns] .flexslider .slides {
   font-weight:300;
   line-height: 35px;
   text-align:center;
-  background-image: url(../images/test/black.png), url(../images/test/black-1.png);
+  background-image: asset-url('test/black.png'), asset-url('test/black-1.png');
   background-repeat: no-repeat, no-repeat;
   background-position: left center, right center;
 }
 
 .new-slides li span{
     text-align: center;
-    color: #00cba0;
+    color: #145c9e;
     font-size: 17px;
     font-weight: normal;
     width: 100%;

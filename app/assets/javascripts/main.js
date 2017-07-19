@@ -1,5 +1,4 @@
-jQuery(function($) {
-
+$(function() {
 	//Preloader
 	var preloader = $('.preloader');
 	$(window).load(function(){

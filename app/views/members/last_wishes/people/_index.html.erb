@@ -6,6 +6,8 @@
       <th>Phone</th>
       <th>Relation</th>
       <th>Notes</th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -16,14 +18,16 @@
         <td><%= person.phone %></td>
         <td><%= person.relation %></td>
         <td><%= person.notes %></td>
-        <td class="text-right">
-          <%= link_to icon('edit'), edit_members_last_wishes_person_path(person), :remote => true %>
-          <%= link_to icon('trash-o'), members_last_wishes_person_path(person), :method => :delete, :remote => true, :data => {:confirm => "Are you sure?"} %>
+        <td>
+          <%= link_to icon('pencil'), edit_members_last_wishes_person_path(person), :remote => true, :class => 'btn btn-success btn-xs' %>
+        </td>
+        <td>
+          <%= link_to icon('trash-o'), members_last_wishes_person_path(person), :method => :delete, :remote => true, :class => 'btn btn-danger btn-xs', :data => {:confirm => "Are you sure?"} %>
         </td>
       </tr>
     <% end.empty? %>
       <tr>
-        <td colspan="5" class="text-center">
+        <td colspan="7" class="text-center">
           <em>You haven't added any person yet</em>
         </td>
       </tr>

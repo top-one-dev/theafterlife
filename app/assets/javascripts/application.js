@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap
 //= require jquery.inview.min
 //= require wow.min
 //= require mousescroll
@@ -21,3 +21,4 @@
 //= require lightbox.min
 //= require jquery.flexslider
 //= require main
+//= require jquery.growl

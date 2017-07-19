@@ -1,0 +1,14 @@
+<% if notice.present? %>
+  <script>
+  $(function() {
+    $.growl.notice({ title: 'Success!', message: "<%= notice %>" });
+  });
+  </script>
+<% end %>
+<% if alert.present? %>
+  <script>
+  $(function() {
+    $.growl.error({ title: 'Error!', message: "<%= alert %>" });
+  });
+  </script>
+<% end %>

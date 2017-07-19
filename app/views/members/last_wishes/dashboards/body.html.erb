@@ -2,9 +2,26 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
+        <%= link_to members_last_wishes_burial_service_path, :remote => true, :id => "burial_service_link" do %>
+          <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
+          Burial Service
+        <% end %>
+        <span class="accordion_preloader" id="burial_service_preloader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </span>                      
+      </h4>
+    </div>
+    <div id="burial_service_panel" class="panel-collapse collapse">
+      <div class="panel-body"></div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
         <%= link_to members_last_wishes_science_donation_path, :remote => true, :id => "science_donation_link" do %>
           <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
-          My Science Donation
+          Science Donation
         <% end %>
         <span class="accordion_preloader" id="science_donation_preloader">
           <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
@@ -22,7 +39,7 @@
       <h4 class="panel-title">
         <%= link_to members_last_wishes_cremation_path, :remote => true, :id => "cremation_link" do %>
           <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
-          My Cremation
+          Cremation
         <% end %>
         <span class="accordion_preloader" id="cremation_preloader">
           <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
@@ -33,25 +50,7 @@
       <div class="panel-body"></div>
     </div>
   </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <%= link_to members_last_wishes_burial_service_path, :remote => true, :id => "burial_service_link" do %>
-          <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
-          My Burial Service
-        <% end %>
-        <span class="accordion_preloader" id="burial_service_preloader">
-          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
-        </span>                      
-      </h4>
-    </div>
-    <div id="burial_service_panel" class="panel-collapse collapse">
-      <div class="panel-body"></div>
-    </div>
-  </div>
 </div>
-
 <script>
 $(function() {
   var timeout;

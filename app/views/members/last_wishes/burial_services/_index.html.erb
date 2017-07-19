@@ -1,1 +1,32 @@
-<p>Burial Service will be implemented</p>
+<%= form_for [:members, :last_wishes, @burial_service], :remote => true do |f| %>
+  <div class="form-group">
+    <%= f.label nil, "Do I want a traditional burial?" %>
+    <div>
+      <label class="radio-inline"><%= f.radio_button :enabled, true %> Yes</label>
+      <label class="radio-inline"><%= f.radio_button :enabled, false %> No</label>
+    </div>
+  </div>
+  <%= f.fields_for :address, @burial_service.address do |af| %>
+  <div class="form-group">
+    <%= af.label :name, "Burial Location" %>
+    <%= af.text_field :name, :class => 'form-control' %>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :plot, "Burial Plot" %>
+    <%= f.text_field :plot, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :symbolic_goodbye, "Symbolic Marker" %>
+    <%= f.text_field :symbolic_goodbye, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :coffin_selection, "Coffin Selection" %>
+    <%= text_field_tag :coffin_selection, nil, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <%= f.submit 'Save', :class => 'btn btn-success' %>
+<% end %>

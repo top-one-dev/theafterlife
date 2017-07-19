@@ -10,6 +10,7 @@
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= favicon_link_tag 'favicon.png' %>
 
   <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -29,6 +30,7 @@
         <div class="col-md-6"></div>
         <div class="col-md-6">
           <%= yield %>
+          <%= render :partial => "shared/alerts" %>
         </div>
       </div>
     </div>
