@@ -58,6 +58,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    coinbase (4.1.0)
     concurrent-ruby (1.0.5)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -224,6 +225,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   coffee-rails (~> 4.2)
+  coinbase
   devise (~> 4.3.0)
   dry_admin
   font-awesome-sass (~> 4.7.0)

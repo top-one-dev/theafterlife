@@ -27,6 +27,7 @@ gem 'geocoder'
 gem 'dry_admin'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'stripe'
+gem 'coinbase'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
