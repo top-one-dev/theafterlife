@@ -165,8 +165,53 @@ $(function() {
 		});
 	});
 
+	$('#accordion .panel').each(function(){
+		var id = $(this).attr('id');
+		$(this).find("a").click(function(){
+			window.setTimeout(function(){
+				if(!$('#'+id+"_panel").hasClass('in')) {
+					$('#'+id+"_preloader").show();
+				}
+			},150);
+			$('.panel-title a').not($(this)).each(function(){
+				$(this).children('.glyphicon').removeClass('rotate-90');
+			});
+			$('#'+id+" .glyphicon").toggleClass('rotate-90');
+		});
+	});
+
+	$('.cdropdown').hover(function() {		
+	  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);		
+	}, function() {		
+	  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);		
+	});		
+	$('a[data-toggle="collapse"]').click(function () {		
+		if ($(this).find('span.toggle-icon').hasClass('glyphicon-chevron-down')) {		
+			$($(this).attr('data-parent') + ' a[data-toggle="collapse"]').find('span.toggle-icon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');				
+		}else{		
+			$($(this).attr('data-parent') + ' a[data-toggle="collapse"]').find('span.toggle-icon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');		
+			$(this).find('span.toggle-icon').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');				
+		}				
+	});
+
 	
 	// google.maps.event.addDomListener(window, 'load', initialize_map);
+
+	$('.input-date').datepicker({ });		
+	$('.draggable-table tbody').sortable({		
+		axis: 'y',		
+		cursor: 'move'		
+	});		
+	var mySlider = $("input.slider").bootstrapSlider({		
+		formatter: function(value) {		
+			return value + ' miles';		
+		}		
+	});		
+	$("input.slider").on('change', function(event) {		
+		event.preventDefault();		
+		/* Act on the event */		
+		$('.search-filter .radius').val($(this).val());		
+	});
 	
 });
 

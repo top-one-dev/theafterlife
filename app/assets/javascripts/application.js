@@ -21,4 +21,5 @@
 //= require lightbox.min
 //= require jquery.flexslider
 //= require main
+//= require bootstrap-select
 //= require jquery.growl
