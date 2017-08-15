@@ -5,7 +5,7 @@ class Members::LastWishes::LettersController < Members::BaseController
 
   def destroy
     @letter = current_member.letters.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Letter #{@letter.id} has been deleted"
+    @letters = current_member.letters.order('ID')
   end
 
   def show
@@ -19,10 +19,9 @@ class Members::LastWishes::LettersController < Members::BaseController
   def create
     @letter = current_member.letters.new(letter_params)
     if @letter.save
-      redirect_to :action => :index, :notice => "Letter #{@letter.id} has been saved"
+      @letters = current_member.letters.order('ID')
     else
-      flash[:alert] = @letter.errors.full_messages.join(', ')
-      render 'new'
+      @error = @letter.errors.full_messages.join(', ')
     end
   end
 
@@ -33,16 +32,15 @@ class Members::LastWishes::LettersController < Members::BaseController
   def update
     @letter = current_member.letters.find(params[:id])
     if @letter.update(letter_params)
-      redirect_to :action => :index, :notice => "Letter #{@letter.id} has been updated"
+      @letters = current_member.letters.order('ID')
     else
-      flash[:alert] = @letter.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @letter.errors.full_messages.join(', ')
     end
   end
 
   private
 
   def letter_params
-    params.require(:letter).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:letter).permit(:date_of_creation, :addressee, :text)
   end
 end

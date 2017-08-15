@@ -23,11 +23,11 @@ class Members::LastWishes::HeadstonesController < Members::BaseController
 
   def create_if_not_exist
     if current_member.headstone.nil?
-      current_member.headstone.create
+      current_member.create_headstone
     end
   end
 
   def headstone_params
-    params.require(:headstone).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:headstone).permit(:enabled, :epitaph, :individual, :material, :flower_vase, :notes)
   end
 end

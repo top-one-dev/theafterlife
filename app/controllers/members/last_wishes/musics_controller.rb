@@ -5,7 +5,7 @@ class Members::LastWishes::MusicsController < Members::BaseController
 
   def destroy
     @music = current_member.musics.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Music #{@music.id} has been deleted"
+    @musics = current_member.musics.order('ID')
   end
 
   def show
@@ -19,10 +19,9 @@ class Members::LastWishes::MusicsController < Members::BaseController
   def create
     @music = current_member.musics.new(music_params)
     if @music.save
-      redirect_to :action => :index, :notice => "Music #{@music.id} has been saved"
+      @musics = current_member.musics.order('ID')
     else
-      flash[:alert] = @music.errors.full_messages.join(', ')
-      render 'new'
+      @error = @music.errors.full_messages.join(', ')
     end
   end
 
@@ -33,16 +32,15 @@ class Members::LastWishes::MusicsController < Members::BaseController
   def update
     @music = current_member.musics.find(params[:id])
     if @music.update(music_params)
-      redirect_to :action => :index, :notice => "Music #{@music.id} has been updated"
+      @musics = current_member.musics.order('ID')
     else
-      flash[:alert] = @music.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @music.errors.full_messages.join(', ')
     end
   end
 
   private
 
   def music_params
-    params.require(:music).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:music).permit(:artist, :title, :reason)
   end
 end

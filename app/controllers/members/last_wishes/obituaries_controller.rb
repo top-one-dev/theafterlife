@@ -5,17 +5,12 @@ class Members::LastWishes::ObituariesController < Members::BaseController
     @obituary = current_member.obituary
   end
 
-  def edit
-    @obituary = current_member.obituary
-  end
-
   def update
     @obituary = current_member.obituary
     if @obituary.update(obituary_params)
-      redirect_to :action => :show, :notice => "Obituary has been updated"
+      true
     else
-      flash[:alert] = @obituary.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @obituary.errors.full_messages.join(', ')
     end
   end
 
@@ -23,11 +18,11 @@ class Members::LastWishes::ObituariesController < Members::BaseController
 
   def create_if_not_exist
     if current_member.obituary.nil?
-      current_member.obituary.create
+      current_member.create_obituary
     end
   end
 
   def obituary_params
-    params.require(:obituary).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:obituary).permit(:enabled, :birth_day, :birth_place, :schools, :career, :activities, :remember_me_for, :other, :where_to_publish, :my_obituary, :notes)
   end
 end

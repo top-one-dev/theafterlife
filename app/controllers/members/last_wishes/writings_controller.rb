@@ -5,7 +5,7 @@ class Members::LastWishes::WritingsController < Members::BaseController
 
   def destroy
     @writing = current_member.writings.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Writing #{@writing.id} has been deleted"
+    @writings = current_member.writings.order('ID')
   end
 
   def show
@@ -19,10 +19,9 @@ class Members::LastWishes::WritingsController < Members::BaseController
   def create
     @writing = current_member.writings.new(writing_params)
     if @writing.save
-      redirect_to :action => :index, :notice => "Writing #{@writing.id} has been saved"
+      @writings = current_member.writings.order('ID')
     else
-      flash[:alert] = @writing.errors.full_messages.join(', ')
-      render 'new'
+      @error = @writing.errors.full_messages.join(', ')
     end
   end
 
@@ -33,16 +32,15 @@ class Members::LastWishes::WritingsController < Members::BaseController
   def update
     @writing = current_member.writings.find(params[:id])
     if @writing.update(writing_params)
-      redirect_to :action => :index, :notice => "Writing #{@writing.id} has been updated"
+      @writings = current_member.writings.order('ID')
     else
-      flash[:alert] = @writing.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @writing.errors.full_messages.join(', ')
     end
   end
 
   private
 
   def writing_params
-    params.require(:writing).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:writing).permit(:author, :title, :text, :notes)
   end
 end

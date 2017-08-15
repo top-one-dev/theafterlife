@@ -5,7 +5,7 @@ class Members::LastWishes::PossessionsController < Members::BaseController
 
   def destroy
     @possession = current_member.possessions.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Possession #{@possession.id} has been deleted"
+    @possessions = current_member.possessions.order('ID')
   end
 
   def show
@@ -19,10 +19,9 @@ class Members::LastWishes::PossessionsController < Members::BaseController
   def create
     @possession = current_member.possessions.new(possession_params)
     if @possession.save
-      redirect_to :action => :index, :notice => "Possession #{@possession.id} has been saved"
+      @possessions = current_member.possessions.order('ID')
     else
-      flash[:alert] = @possession.errors.full_messages.join(', ')
-      render 'new'
+      @error = @possession.errors.full_messages.join(', ')
     end
   end
 
@@ -33,16 +32,15 @@ class Members::LastWishes::PossessionsController < Members::BaseController
   def update
     @possession = current_member.possessions.find(params[:id])
     if @possession.update(possession_params)
-      redirect_to :action => :index, :notice => "Possession #{@possession.id} has been updated"
+      @possessions = current_member.possessions.order('ID')
     else
-      flash[:alert] = @possession.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @possession.errors.full_messages.join(', ')
     end
   end
 
   private
 
   def possession_params
-    params.require(:possession).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:possession).permit(:what, :who, :notes)
   end
 end

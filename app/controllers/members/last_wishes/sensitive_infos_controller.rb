@@ -5,7 +5,7 @@ class Members::LastWishes::SensitiveInfosController < Members::BaseController
 
   def destroy
     @sensitive_info = current_member.sensitive_infos.destroy(params[:id])
-    redirect_to :action => :index, :notice => "SensitiveInfo #{@sensitive_info.id} has been deleted"
+    @sensitive_infos = current_member.sensitive_infos.order('ID')
   end
 
   def show
@@ -17,12 +17,13 @@ class Members::LastWishes::SensitiveInfosController < Members::BaseController
   end
 
   def create
-    @sensitive_info = current_member.sensitive_infos.new(sensitive_info_params)
+    @sensitive_info = current_member.sensitive_infos.new
+    @sensitive_info.encryption_key = params[:encryption_key].rjust(32," ")
+    @sensitive_info.assign_attributes(sensitive_info_params)
     if @sensitive_info.save
-      redirect_to :action => :index, :notice => "SensitiveInfo #{@sensitive_info.id} has been saved"
+      @sensitive_infos = current_member.sensitive_infos.order('ID')
     else
-      flash[:alert] = @sensitive_info.errors.full_messages.join(', ')
-      render 'new'
+      @error = @sensitive_info.errors.full_messages.join(', ')
     end
   end
 
@@ -32,17 +33,29 @@ class Members::LastWishes::SensitiveInfosController < Members::BaseController
 
   def update
     @sensitive_info = current_member.sensitive_infos.find(params[:id])
+    @sensitive_info.encryption_key = params[:encryption_key].rjust(32," ")
     if @sensitive_info.update(sensitive_info_params)
-      redirect_to :action => :index, :notice => "SensitiveInfo #{@sensitive_info.id} has been updated"
+      @sensitive_infos = current_member.sensitive_infos.order('ID')
     else
-      flash[:alert] = @sensitive_info.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @sensitive_info.errors.full_messages.join(', ')
     end
+  end
+
+  def confirm_unlock
+    @sensitive_info = current_member.sensitive_infos.find(params[:sensitive_info_id])
+    @sensitive_info.encryption_key = params[:encryption_key].rjust(32," ")
+    @error = nil
+    begin
+      @sensitive_info.instruction
+    rescue OpenSSL::Cipher::CipherError
+      @error = "Wrong decryption password"
+    end
+    @sensitive_infos = current_member.sensitive_infos.order('ID')
   end
 
   private
 
   def sensitive_info_params
-    params.require(:sensitive_info).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:sensitive_info).permit(:info_type, :title, :instruction, :notes)
   end
 end

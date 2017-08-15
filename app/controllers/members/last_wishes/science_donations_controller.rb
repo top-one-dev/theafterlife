@@ -5,17 +5,12 @@ class Members::LastWishes::ScienceDonationsController < Members::BaseController
     @science_donation = current_member.science_donation
   end
 
-  def edit
-    @science_donation = current_member.science_donation
-  end
-
   def update
     @science_donation = current_member.science_donation
     if @science_donation.update(science_donation_params)
-      redirect_to :action => :show, :notice => "Science Donation has been updated"
+      true
     else
-      flash[:alert] = @science_donation.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @science_donation.errors.full_messages.join(', ')
     end
   end
 
@@ -28,6 +23,6 @@ class Members::LastWishes::ScienceDonationsController < Members::BaseController
   end
 
   def science_donation_params
-    params.require(:science_donation).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:science_donation).permit(:enables, :organization_name, :notes)
   end
 end

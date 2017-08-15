@@ -27,7 +27,7 @@ class Members::Save::DepositsController < Members::BaseController
     end
   end
 
-  def pay
+  def pay_stripe
     begin
       @deposit = current_member.account_movements.find(params[:deposit_id])
       charge = Stripe::Charge.create(
@@ -54,6 +54,14 @@ class Members::Save::DepositsController < Members::BaseController
       @deposit.payment_errors.create(:error_type => 'Error', :error_description => e.inspect.to_s)
     end 
     redirect_to members_save_deposits_path, :alert => "Something went wrong" and return
+  end
+
+  def pay_coinbase
+    require 'coinbase/wallet'
+    @deposit = current_member.account_movements.find(params[:deposit_id])
+    client = Coinbase::Wallet::Client.new(api_key: "9h2XntlfSflJhqym", api_secret: "xuwMKuDZTZZqAm25gZqSOm1bZUKhgsjW")
+    checkout = client.create_checkout({amount: "#{@deposit.amount}", currency: "USD", name: "The Afterlife LLC", description: "One time deposit (#{@deposit.created_at.to_date})" })
+    puts checkout.inspect
   end
 
   def deposit_params

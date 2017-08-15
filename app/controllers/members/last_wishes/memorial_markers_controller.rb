@@ -1,48 +1,31 @@
 class Members::LastWishes::MemorialMarkersController < Members::BaseController
-  def index
-    @memorial_markers = current_member.memorial_markers.order('ID')
-  end
-
-  def destroy
-    @memorial_marker = current_member.memorial_markers.destroy(params[:id])
-    redirect_to :action => :index, :notice => "MemorialMarker #{@memorial_marker.id} has been deleted"
-  end
+  before_action :create_if_not_exist
 
   def show
-    @memorial_marker = current_member.memorial_markers.find(params[:id])
-  end
-
-  def new
-    @memorial_marker = current_member.memorial_markers.new
-  end
-
-  def create
-    @memorial_marker = current_member.memorial_markers.new(memorial_marker_params)
-    if @memorial_marker.save
-      redirect_to :action => :index, :notice => "MemorialMarker #{@memorial_marker.id} has been saved"
-    else
-      flash[:alert] = @memorial_marker.errors.full_messages.join(', ')
-      render 'new'
-    end
-  end
-
-  def edit
-    @memorial_marker = current_member.memorial_markers.find(params[:id])
+    @memorial_marker = current_member.memorial_marker
+    @mm_types = {:bench => "Bench", :tree => "Tree", :garden => "Garden", :dedication => "Dedication", :garden_plaque => "Garden Plaque", :statue => "Statue", :other => "Other"}
+    @stored_mm_types = @memorial_marker.mm_type.split(',')
   end
 
   def update
-    @memorial_marker = current_member.memorial_markers.find(params[:id])
+    @memorial_marker = current_member.memorial_marker
     if @memorial_marker.update(memorial_marker_params)
-      redirect_to :action => :index, :notice => "MemorialMarker #{@memorial_marker.id} has been updated"
+      @memorial_marker.update(:mm_type => params[:mm_types].map{|t| t.to_s}.join(','))
+      true
     else
-      flash[:alert] = @memorial_marker.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @memorial_marker.errors.full_messages.join(', ')
     end
   end
 
   private
 
+  def create_if_not_exist
+    if current_member.memorial_marker.nil?
+      current_member.create_memorial_marker
+    end
+  end
+
   def memorial_marker_params
-    params.require(:memorial_marker).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:memorial_marker).permit(:enabled, :mm_type, :writing, :notes)
   end
 end

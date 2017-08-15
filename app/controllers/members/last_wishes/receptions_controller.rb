@@ -5,17 +5,12 @@ class Members::LastWishes::ReceptionsController < Members::BaseController
     @reception = current_member.reception
   end
 
-  def edit
-    @reception = current_member.reception
-  end
-
   def update
     @reception = current_member.reception
     if @reception.update(reception_params)
-      redirect_to :action => :show, :notice => "Reception has been updated"
+      true
     else
-      flash[:alert] = @reception.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @reception.errors.full_messages.join(', ')
     end
   end
 
@@ -23,11 +18,12 @@ class Members::LastWishes::ReceptionsController < Members::BaseController
 
   def create_if_not_exist
     if current_member.reception.nil?
-      current_member.reception.create
+      reception = current_member.create_reception
+      reception.create_address
     end
   end
 
   def reception_params
-    params.require(:reception).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:reception).permit(:enabled, :public, :notes, :food, :drink, :music, :flowers, :address_attributes => [:id, :name])
   end
 end

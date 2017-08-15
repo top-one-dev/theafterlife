@@ -5,17 +5,12 @@ class Members::LastWishes::TransportationsController < Members::BaseController
     @transportation = current_member.transportation
   end
 
-  def edit
-    @transportation = current_member.transportation
-  end
-
   def update
     @transportation = current_member.transportation
     if @transportation.update(transportation_params)
-      redirect_to :action => :show, :notice => "Transportation has been updated"
+      true
     else
-      flash[:alert] = @transportation.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @transportation.errors.full_messages.join(', ')
     end
   end
 
@@ -23,11 +18,11 @@ class Members::LastWishes::TransportationsController < Members::BaseController
 
   def create_if_not_exist
     if current_member.transportation.nil?
-      current_member.transportation.create
+      current_member.create_transportation
     end
   end
 
   def transportation_params
-    params.require(:transportation).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:transportation).permit(:transport_of_deceased, :transport_of_family, :notes)
   end
 end

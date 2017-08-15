@@ -5,7 +5,7 @@ class Members::LastWishes::MemoriesController < Members::BaseController
 
   def destroy
     @memory = current_member.memories.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Memory #{@memory.id} has been deleted"
+    @memories = current_member.memories.order('ID')
   end
 
   def show
@@ -19,10 +19,9 @@ class Members::LastWishes::MemoriesController < Members::BaseController
   def create
     @memory = current_member.memories.new(memory_params)
     if @memory.save
-      redirect_to :action => :index, :notice => "Memory #{@memory.id} has been saved"
+      @memories = current_member.memories.order('ID')
     else
-      flash[:alert] = @memory.errors.full_messages.join(', ')
-      render 'new'
+      @error = @memory.errors.full_messages.join(', ')
     end
   end
 
@@ -33,16 +32,15 @@ class Members::LastWishes::MemoriesController < Members::BaseController
   def update
     @memory = current_member.memories.find(params[:id])
     if @memory.update(memory_params)
-      redirect_to :action => :index, :notice => "Memory #{@memory.id} has been updated"
+      @memories = current_member.memories.order('ID')
     else
-      flash[:alert] = @memory.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @memory.errors.full_messages.join(', ')
     end
   end
 
   private
 
   def memory_params
-    params.require(:memory).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:memory).permit(:heading, :text, :notes)
   end
 end

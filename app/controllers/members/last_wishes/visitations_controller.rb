@@ -10,12 +10,12 @@ class Members::LastWishes::VisitationsController < Members::BaseController
   end
 
   def update
+    puts params.inspect
     @visitation = current_member.visitation
     if @visitation.update(visitation_params)
-      redirect_to :action => :show, :notice => "Visitation has been updated"
+      true
     else
-      flash[:alert] = @visitation.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @visitation.errors.full_messages.join(', ')
     end
   end
 
@@ -23,11 +23,12 @@ class Members::LastWishes::VisitationsController < Members::BaseController
 
   def create_if_not_exist
     if current_member.visitation.nil?
-      current_member.visitation.create
+      visitation = current_member.create_visitation
+      visitation.create_address
     end
   end
 
   def visitation_params
-    params.require(:visitation).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:visitation).permit(:enabled, :public, :notes, :address_attributes => [:id, :name])
   end
 end

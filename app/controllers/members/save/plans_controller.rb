@@ -13,7 +13,7 @@ class Members::Save::PlansController < Members::BaseController
     end
   end
 
-  def pay
+  def pay_stripe
     begin
       @plan = current_member.payment_plans.find(params[:plan_id])
       stripe_plan_id = "plan_#{@plan.id}_member_#{current_member.id}"

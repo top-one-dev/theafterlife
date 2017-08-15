@@ -1,48 +1,28 @@
 class Members::LastWishes::MemorialContributionsController < Members::BaseController
-  def index
-    @memorial_contributions = current_member.memorial_contributions.order('ID')
-  end
-
-  def destroy
-    @memorial_contribution = current_member.memorial_contributions.destroy(params[:id])
-    redirect_to :action => :index, :notice => "MemorialContribution #{@memorial_contribution.id} has been deleted"
-  end
+  before_action :create_if_not_exist
 
   def show
-    @memorial_contribution = current_member.memorial_contributions.find(params[:id])
-  end
-
-  def new
-    @memorial_contribution = current_member.memorial_contributions.new
-  end
-
-  def create
-    @memorial_contribution = current_member.memorial_contributions.new(memorial_contribution_params)
-    if @memorial_contribution.save
-      redirect_to :action => :index, :notice => "MemorialContribution #{@memorial_contribution.id} has been saved"
-    else
-      flash[:alert] = @memorial_contribution.errors.full_messages.join(', ')
-      render 'new'
-    end
-  end
-
-  def edit
-    @memorial_contribution = current_member.memorial_contributions.find(params[:id])
+    @memorial_contribution = current_member.memorial_contribution
   end
 
   def update
-    @memorial_contribution = current_member.memorial_contributions.find(params[:id])
+    @memorial_contribution = current_member.memorial_contribution
     if @memorial_contribution.update(memorial_contribution_params)
-      redirect_to :action => :index, :notice => "MemorialContribution #{@memorial_contribution.id} has been updated"
+      true
     else
-      flash[:alert] = @memorial_contribution.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @memorial_contribution.errors.full_messages.join(', ')
     end
   end
 
   private
 
+  def create_if_not_exist
+    if current_member.memorial_contribution.nil?
+      current_member.create_memorial_contribution
+    end
+  end
+
   def memorial_contribution_params
-    params.require(:memorial_contribution).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:memorial_contribution).permit(:enabled, :sent_to, :notes)
   end
 end

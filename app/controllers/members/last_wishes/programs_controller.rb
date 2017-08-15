@@ -5,17 +5,12 @@ class Members::LastWishes::ProgramsController < Members::BaseController
     @program = current_member.program
   end
 
-  def edit
-    @program = current_member.program
-  end
-
   def update
     @program = current_member.program
     if @program.update(program_params)
-      redirect_to :action => :show, :notice => "Program has been updated"
+      true
     else
-      flash[:alert] = @program.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @program.errors.full_messages.join(', ')
     end
   end
 
@@ -23,11 +18,11 @@ class Members::LastWishes::ProgramsController < Members::BaseController
 
   def create_if_not_exist
     if current_member.program.nil?
-      current_member.program.create
+      current_member.create_program
     end
   end
 
   def program_params
-    params.require(:program).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:program).permit(:design, :text_on_cover, :words_i_want_to_included, :notes)
   end
 end

@@ -5,17 +5,12 @@ class Members::LastWishes::BurialServicesController < Members::BaseController
     @burial_service = current_member.burial_service
   end
 
-  def edit
-    @burial_service = current_member.burial_service
-  end
-
   def update
     @burial_service = current_member.burial_service
     if @burial_service.update(burial_service_params)
-      redirect_to :action => :show, :notice => "Burial Service has been updated"
+      true
     else
-      flash[:alert] = @burial_service.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @burial_service.errors.full_messages.join(', ')
     end
   end
 
@@ -29,6 +24,6 @@ class Members::LastWishes::BurialServicesController < Members::BaseController
   end
 
   def burial_service_params
-    params.require(:burial_service).permit(:enabled, :plot, :symbolic_goodbye, :notes, :address_attributes => [:id, :name])
+    params.require(:burial_service).permit(:enabled, :plot, :symbolic_marker, :notes, :address_attributes => [:id, :name])
   end
 end

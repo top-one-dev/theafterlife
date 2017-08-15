@@ -1,48 +1,54 @@
 class Members::LastWishes::PhotosController < Members::BaseController
+  before_action :create_if_not_exist
+
   def index
-    @photos = current_member.photos.order('ID')
+    @photos = current_member.photo_gallery.photos.order('ID')
   end
 
   def destroy
-    @photo = current_member.photos.destroy(params[:id])
-    redirect_to :action => :index, :notice => "Photo #{@photo.id} has been deleted"
+    @photo = current_member.photo_gallery.photos.destroy(params[:id])
+    @photos = current_member.photo_gallery.photos.order('ID')
   end
 
   def show
-    @photo = current_member.photos.find(params[:id])
+    @photo = current_member.photo_gallery.photos.find(params[:id])
   end
 
   def new
-    @photo = current_member.photos.new
+    @photo = current_member.photo_gallery.photos.new
   end
 
   def create
-    @photo = current_member.photos.new(photo_params)
+    @photo = current_member.photo_gallery.photos.new(photo_params)
     if @photo.save
-      redirect_to :action => :index, :notice => "Photo #{@photo.id} has been saved"
+      @photos = current_member.photo_gallery.photos.order('ID')
     else
-      flash[:alert] = @photo.errors.full_messages.join(', ')
-      render 'new'
+      @error = @photo.errors.full_messages.join(', ')
     end
   end
 
   def edit
-    @photo = current_member.photos.find(params[:id])
+    @photo = current_member.photo_gallery.photos.find(params[:id])
   end
 
   def update
-    @photo = current_member.photos.find(params[:id])
+    @photo = current_member.photo_gallery.photos.find(params[:id])
     if @photo.update(photo_params)
-      redirect_to :action => :index, :notice => "Photo #{@photo.id} has been updated"
+      @photos = current_member.photo_gallery.photos.order('ID')
     else
-      flash[:alert] = @photo.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @photo.errors.full_messages.join(', ')
     end
   end
 
   private
 
+  def create_if_not_exist
+    if current_member.photo_gallery.nil?
+      current_member.create_photo_gallery
+    end
+  end
+
   def photo_params
-    params.require(:photo).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:photo).permit(:file_file_name, :caption)
   end
 end

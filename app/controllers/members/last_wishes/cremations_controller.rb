@@ -5,17 +5,12 @@ class Members::LastWishes::CremationsController < Members::BaseController
     @cremation = current_member.cremation
   end
 
-  def edit
-    @cremation = current_member.cremation
-  end
-
   def update
     @cremation = current_member.cremation
     if @cremation.update(cremation_params)
-      redirect_to :action => :show, :notice => "Cremation has been updated"
+      true
     else
-      flash[:alert] = @cremation.errors.full_messages.join(', ')
-      render 'edit'
+      @error = @cremation.errors.full_messages.join(', ')
     end
   end
 
@@ -28,6 +23,6 @@ class Members::LastWishes::CremationsController < Members::BaseController
   end
 
   def cremation_params
-    params.require(:cremation).permit(:name, :email, :phone, :relation, :notes)
+    params.require(:cremation).permit(:enabled, :ashes_disposition, :notes)
   end
 end
