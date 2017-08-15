@@ -17,6 +17,7 @@ gem 'devise', '~> 4.3.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'bootstrap-sass'
+gem 'bootstrap-select-rails'
 gem 'paperclip'
 
 gem 'jquery-rails'
@@ -28,6 +29,7 @@ gem 'dry_admin'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'stripe'
 gem 'coinbase'
+gem "attr_encrypted", "~> 3.0.0"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
