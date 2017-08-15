@@ -1,0 +1,8 @@
+if($('#headstone_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#headstone_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#headstone_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#headstone_panel').collapse('toggle');
+$('#headstone_preloader').hide();

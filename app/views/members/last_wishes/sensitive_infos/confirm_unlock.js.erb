@@ -1,0 +1,10 @@
+<% if @error.present? %>
+  $.growl.error({ title: 'Error!', message: "<%= j @error %>" });
+<% else %>
+  $.growl.notice({ title: 'Success!', message: "Sensitive info has been unlocked" });
+  $('#modal').modal('hide');
+  $('#modal').on('hidden.bs.modal', function (e) {
+    $('#sensitive_infos_panel .panel-body').html('<%= j render :partial =>"index" %>');
+    $('#sensitive_info_<%= @sensitive_info.id %>').parent().html('<%= j @sensitive_info.instruction %>');
+  })
+<% end %>

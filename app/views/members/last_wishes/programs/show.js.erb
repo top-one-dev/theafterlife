@@ -1,0 +1,8 @@
+if($('#program_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#program_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#program_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#program_panel').collapse('toggle');
+$('#program_preloader').hide();

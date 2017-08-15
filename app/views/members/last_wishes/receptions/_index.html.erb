@@ -1,0 +1,42 @@
+<%= form_for [:members, :last_wishes, @reception], :remote => true, :format => :js do |f| %>
+  <div class="form-group">
+    <%= f.label nil, "Do I want a reception?" %>
+    <div>
+      <label class="radio-inline"><%= f.radio_button :enabled, true %> Yes</label>
+      <label class="radio-inline"><%= f.radio_button :enabled, false %> No</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :public, "If yes, should my reception be public?" %>
+    <%= f.select :public, options_for_select([ "Yes, public", "No, private"]), {}, :class=>"form-control" %>
+  </div>
+  <%= f.fields_for :address, @reception.address do |af| %>
+  <div class="form-group">
+    <%= af.label :name, "Reception Location" %>
+    <%= af.text_field :name, :class => 'form-control' %>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :food, 'Describe my food preferences for the reception?' %>
+    <%= f.text_area :food, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :drink, 'Describe my drink preferences for the reception?' %>
+    <%= f.text_area :drink, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :music, 'Do I have any preferred music for the reception?' %>
+    <%= f.text_area :music, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :flowers, 'Describe my flower preferences for the reception?' %>
+    <%= f.text_area :flowers, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit 'Save', :class => 'btn btn-success' %>
+  </div>
+<% end %>

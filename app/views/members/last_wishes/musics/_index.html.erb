@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Song Title</th>
+      <th>Reason</th>
+      <th>Download Button / Link</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @musics.each do |music| %>
+      <tr>
+        <td><%= music.artist %></td>
+        <td><%= music.title %></td>
+        <td><%= music.reason %></td>
+        <td><%= link_to icon('play'), members_last_wishes_music_play_path(music), :remote => true, :class => 'btn btn-success btn-xs' %></td>
+        <td>
+          <%= link_to icon('pencil'), edit_members_last_wishes_music_path(music), :remote => true, :class => 'btn btn-success btn-xs' %>
+        </td>
+        <td>
+          <%= link_to icon('trash-o'), members_last_wishes_music_path(music), :method => :delete, :remote => true, :class => 'btn btn-danger btn-xs', :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="6" class="text-center">
+          <em>You haven't added any music yet</em>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "Add New Music", new_members_last_wishes_music_path, :class => "btn btn-success", :remote => "true" %>

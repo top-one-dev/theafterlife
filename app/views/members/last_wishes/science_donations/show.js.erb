@@ -3,5 +3,6 @@ if($('#science_donation_panel .panel-body').is(':hidden')){
      $(this).collapse('hide');
   });
 }
-$('#science_donation_panel .panel-body').html('<%= j render :partial =>"show" %>');
+$('#science_donation_panel .panel-body').html('<%= j render :partial =>"index" %>');
 $('#science_donation_panel').collapse('toggle');
+$('#science_donation_preloader').hide();

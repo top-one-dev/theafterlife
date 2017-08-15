@@ -5,3 +5,4 @@ if($('#burial_service_panel .panel-body').is(':hidden')){
 }
 $('#burial_service_panel .panel-body').html('<%= j render :partial =>"index" %>');
 $('#burial_service_panel').collapse('toggle');
+$('#burial_service_preloader').hide();

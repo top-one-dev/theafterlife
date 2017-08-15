@@ -1,0 +1,8 @@
+if($('#memorial_contribution_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#memorial_contribution_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#memorial_contribution_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#memorial_contribution_panel').collapse('toggle');
+$('#memorial_contribution_preloader').hide();

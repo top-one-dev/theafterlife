@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Heading</th>
+      <th>Text</th>
+      <th>Notes</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @memories.each do |memory| %>
+      <tr>
+        <td><%= memory.heading %></td>
+        <td><%= memory.text %></td>
+        <td><%= memory.notes %></td>
+        <td>
+          <%= link_to icon('pencil'), edit_members_last_wishes_memory_path(memory), :remote => true, :class => 'btn btn-success btn-xs' %>
+        </td>
+        <td>
+          <%= link_to icon('trash-o'), members_last_wishes_memory_path(memory), :method => :delete, :remote => true, :class => 'btn btn-danger btn-xs', :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="5" class="text-center">
+          <em>You haven't added any memory yet</em>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "Add New Memory", new_members_last_wishes_memory_path, :class => "btn btn-success", :remote => "true" %>

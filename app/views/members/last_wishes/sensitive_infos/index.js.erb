@@ -1,0 +1,8 @@
+if($('#sensitive_infos_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#sensitive_infos_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#sensitive_infos_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#sensitive_infos_panel').collapse('toggle');
+$('#sensitive_infos_preloader').hide();

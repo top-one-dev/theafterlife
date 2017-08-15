@@ -1,0 +1,8 @@
+if($('#visitation_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#visitation_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#visitation_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#visitation_panel').collapse('toggle');
+$('#visitation_preloader').hide();

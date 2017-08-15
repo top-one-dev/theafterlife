@@ -5,3 +5,4 @@ if($('#people_panel .panel-body').is(':hidden')){
 }
 $('#people_panel .panel-body').html('<%= j render :partial =>"index" %>');
 $('#people_panel').collapse('toggle');
+$('#people_preloader').hide();

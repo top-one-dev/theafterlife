@@ -1,0 +1,17 @@
+<%= form_for [:members, :last_wishes, @transportation], :remote => true, :format => :js do |f| %>
+  <div class="form-group">
+    <%= f.label :transport_of_deceased, 'How would I like the transportation of my body to be arranged?' %>
+    <%= f.text_area :transport_of_deceased, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :transport_of_family, 'How would I like the transportation of my family and loved ones to be arranged?' %>
+    <%= f.text_area :transport_of_family, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes, 'Notes' %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit 'Save', :class => 'btn btn-success' %>
+  </div>
+<% end %>

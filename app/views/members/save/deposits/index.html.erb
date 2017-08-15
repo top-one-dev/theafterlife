@@ -30,7 +30,7 @@
           <td>
             <% if deposit.payment_status == "pending" %>
               <%= link_to 'Delete', members_save_deposit_path(deposit), :method => :delete, :class => 'btn btn-danger', :data => {:confirm => 'Are you sure?'} %>
-              <%= form_tag members_save_deposit_pay_path(deposit), :style => "display: inline-block" do |f| %>
+              <%= form_tag members_save_deposit_pay_stripe_path(deposit), :style => "display: inline-block" do |f| %>
                 <script
                   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                   data-key="pk_test_VRJUiXVBlCzsORnzVn4S6x4D"
@@ -42,6 +42,7 @@
                   data-locale="auto">
                 </script>
               <% end %>
+              <%= link_to 'Pay with Bitcoin', members_save_deposit_pay_coinbase_path(deposit), :class => 'btn btn-primary' %>
             <% end %>
           </td>
         </tr>

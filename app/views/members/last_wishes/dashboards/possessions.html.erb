@@ -1,0 +1,18 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default" id="possessions">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= link_to members_last_wishes_possessions_path, :remote => true, :id => "possessions_link" do %>
+          <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
+          My Possessions
+        <% end %>
+        <span class="accordion_preloader" id="possessions_preloader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </span>
+      </h4>
+    </div>
+    <div id="possessions_panel" class="panel-collapse collapse">
+      <div class="panel-body"></div>
+    </div>
+  </div>
+</div>

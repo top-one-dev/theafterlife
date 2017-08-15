@@ -10,7 +10,7 @@
       <dt>Interval</dt>
       <dd><%= @plan.interval %></dd>
     </dl>
-    <%= form_for(@plan, :url => members_save_plan_pay_path(@plan), :method => :post) do |f| %>
+    <%= form_for(@plan, :url => members_save_plan_pay_stripe_path(@plan), :method => :post) do |f| %>
       <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="pk_test_VRJUiXVBlCzsORnzVn4S6x4D"

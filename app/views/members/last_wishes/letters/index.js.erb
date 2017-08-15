@@ -1,0 +1,8 @@
+if($('#letters_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#letters_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#letters_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#letters_panel').collapse('toggle');
+$('#letters_preloader').hide();

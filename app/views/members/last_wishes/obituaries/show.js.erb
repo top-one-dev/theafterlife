@@ -1,0 +1,8 @@
+if($('#obituary_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#obituary_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#obituary_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#obituary_panel').collapse('toggle');
+$('#obituary_preloader').hide();

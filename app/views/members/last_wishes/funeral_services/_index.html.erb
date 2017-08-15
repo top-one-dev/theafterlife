@@ -1,0 +1,49 @@
+<%= form_for [:members, :last_wishes, @funeral_service], :remote => true, :format => :js do |f| %>
+  <div class="form-group">
+    <%= f.label nil, "Do I want a funeral service?" %>
+    <div>
+      <label class="radio-inline"><%= f.radio_button :enabled, true %> Yes</label>
+      <label class="radio-inline"><%= f.radio_button :enabled, false %> No</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :public, "Should my funeral be open to the public?" %>
+    <%= f.select :public, options_for_select([ "Yes, public", "No, private"]), {}, :class=>"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :color_themes, 'What are my preferred color themes for the funeral design?' %>
+    <%= f.text_field :color_themes, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :flowers, 'What are my preferred flowers for the funeral design?' %>
+    <%= f.text_field :flowers, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :reading, 'Do I have any preferred readings for my funeral program?' %>
+    <%= f.text_area :reading, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :music, 'Do I have any preferred music for my funeral program?' %>
+    <%= f.text_field :music, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <a type="button" class="btn btn-success">+ Add Music from My Files</a> 
+  </div>
+  <div class="form-group">
+    <%= f.label :food_drinks, 'Do I have any preferred food or drinks to be available during my funeral?' %>
+    <%= f.text_field :food_drinks, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <%= f.fields_for :address, @funeral_service.address do |af| %>
+  <div class="form-group">
+    <%= af.label :name, "Where would I like my Funeral to take place?" %>
+    <%= af.text_field :name, :class => 'form-control' %>
+  </div>
+  <% end %>
+  <div class="text-right">
+    <%= f.submit 'Save', :class => 'btn btn-success' %>
+  </div>
+<% end %>

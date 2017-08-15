@@ -1,0 +1,8 @@
+if($('#memories_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#memories_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#memories_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#memories_panel').collapse('toggle');
+$('#memories_preloader').hide();

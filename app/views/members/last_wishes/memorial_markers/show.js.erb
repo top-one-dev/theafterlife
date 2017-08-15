@@ -1,0 +1,8 @@
+if($('#memorial_marker_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#memorial_marker_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#memorial_marker_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#memorial_marker_panel').collapse('toggle');
+$('#memorial_marker_preloader').hide();

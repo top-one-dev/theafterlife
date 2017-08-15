@@ -2,8 +2,8 @@
   $.growl.error({ title: 'Error!', message: "<%= j @error %>" });
 <% else %>
   $.growl.notice({ title: 'Success!', message: "<%= @pet.name %> has been added to your list" });
-  $('#new_pet_modal').modal('hide');
-  $('#new_pet_modal').on('hidden.bs.modal', function (e) {
+  $('#modal').modal('hide');
+  $('#modal').on('hidden.bs.modal', function (e) {
     $('#pets_panel .panel-body').html('<%= j render :partial =>"index" %>');
   })
 <% end %>

@@ -1,0 +1,5 @@
+<% if @error.present? %>
+  $.growl.error({ title: 'Error!', message: "<%= j @error %>" });
+<% else %>
+  $.growl.notice({ title: 'Success!', message: "Transportation has been saved" });
+<% end %>

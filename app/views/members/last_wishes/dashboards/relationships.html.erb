@@ -1,5 +1,5 @@
 <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
+  <div class="panel panel-default" id="people">
     <div class="panel-heading">
       <h4 class="panel-title">
         <%= link_to members_last_wishes_people_path, :remote => true, :id => "people_link" do %>
@@ -16,8 +16,7 @@
     </div>
   </div>
 
-
-  <div class="panel panel-default">
+  <div class="panel panel-default" id="pets">
     <div class="panel-heading">
       <h4 class="panel-title">
         <%= link_to members_last_wishes_pets_path, :remote => true, :id => "pets_link" do %>
@@ -34,31 +33,3 @@
     </div>
   </div>
 </div>
-
-<script>
-$(function() {
-  var timeout;
-
-  $('#people_link').on('click', function(){
-    if($('#people_panel .panel-body').is(':hidden')) {
-      $('#people_preloader').show();
-    }
-  });
-
-  $('#people_panel').on('shown.bs.collapse', function(){
-    $('#people_preloader').hide();
-  });
-
-  $('#pets_link').on('click', function(){
-    if($('#pets_panel .panel-body').is(':hidden')) {
-      $('#pets_preloader').show();
-    }
-  });
-
-  $('#pets_panel').on('shown.bs.collapse', function(){
-    $('#pets_preloader').hide();
-  });
-
-
-});
-</script>

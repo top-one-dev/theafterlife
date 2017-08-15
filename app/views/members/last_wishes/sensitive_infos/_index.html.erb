@@ -1,0 +1,38 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Info Type</th>
+      <th>Title</th>
+      <th>Instruction</th>
+      <th>Notes</th>
+      <th>File Attachment</th>
+      <th>Edit</th>
+      <th>Delete</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <% if @sensitive_infos.each do |sensitive_info| %>
+      <tr>
+        <td><%= sensitive_info.info_type %></td>
+        <td><%= sensitive_info.title %></td>
+        <td><%= link_to "Unlock", members_last_wishes_sensitive_info_unlock_path(sensitive_info), :remote => true, :id => "sensitive_info_#{sensitive_info.id}" %></td>
+        <td><%= sensitive_info.notes %></td>
+        <td></td>
+        <td>
+          <%= link_to icon('pencil'), edit_members_last_wishes_sensitive_info_path(sensitive_info), :remote => true, :class => 'btn btn-success btn-xs' %>
+        </td>
+        <td>
+          <%= link_to icon('trash-o'), members_last_wishes_sensitive_info_path(sensitive_info), :method => :delete, :remote => true, :class => 'btn btn-danger btn-xs', :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="7" class="text-center">
+          <em>You haven't added any sensitive info yet</em>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "Add New Sensitive Info", new_members_last_wishes_sensitive_info_path, :class => "btn btn-success", :remote => "true" %>

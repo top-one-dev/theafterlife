@@ -5,3 +5,4 @@ if($('#pets_panel .panel-body').is(':hidden')){
 }
 $('#pets_panel .panel-body').html('<%= j render :partial =>"index" %>');
 $('#pets_panel').collapse('toggle');
+$('#pets_preloader').hide();

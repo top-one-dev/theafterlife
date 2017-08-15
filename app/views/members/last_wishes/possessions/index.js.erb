@@ -1,0 +1,8 @@
+if($('#possessions_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#possessions_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#possessions_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#possessions_panel').collapse('toggle');
+$('#possessions_preloader').hide();

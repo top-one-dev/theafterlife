@@ -1,0 +1,52 @@
+<%= form_for [:members, :last_wishes, @obituary], :remote => true, :format => :js do |f| %>
+  <div class="form-group">
+    <%= f.label nil, "Do I want to have an obituary?" %>
+    <div>
+      <label class="radio-inline"><%= f.radio_button :enabled, true %> Yes</label>
+      <label class="radio-inline"><%= f.radio_button :enabled, false %> No</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :birth_day, 'What is my date of birth?' %>
+    <%= f.date_field :birth_day, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :birth_place, 'What is my place of birth?' %>
+    <%= f.text_field :birth_place, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :schools, 'My list of schools attended' %>
+    <%= f.text_area :schools, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :career, 'Describe my careers and professional journey' %>
+    <%= f.text_area :career, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :activities, 'Other activities and hobbies that I enjoy' %>
+    <%= f.text_area :activities, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :remember_me_for, 'I want people to remember me for the following' %>
+    <%= f.text_area :remember_me_for, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :other, 'Are there any other details I would like included' %>
+    <%= f.text_area :other, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :where_to_publish, 'Where would I like my obituary published' %>
+    <%= f.text_field :where_to_publish, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :my_obituary, 'I wrote my own obituary and would like it to say the following' %>
+    <%= f.text_area :my_obituary, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes, 'Notes' %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit 'Save', :class => 'btn btn-success' %>
+  </div>
+<% end %>

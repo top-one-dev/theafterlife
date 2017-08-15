@@ -1,0 +1,29 @@
+<%= form_for [:members, :last_wishes, @memorial_marker], :remote => true, :format => :js do |f| %>
+  <div class="form-group">
+    <%= f.label nil, "Do I want a memorial marker?" %>
+    <div>
+      <label class="radio-inline"><%= f.radio_button :enabled, true %> Yes</label>
+      <label class="radio-inline"><%= f.radio_button :enabled, false %> No</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :mm_type, 'What type of Memorial Marker would I like? (pick one or more)' %>
+    <%= hidden_field_tag 'mm_types[]', '' %>
+    <% @mm_types.each do |key, value| %>
+      <div class="checkbox">
+        <label><%= check_box_tag 'mm_types[]', key, @stored_mm_types.include?(key.to_s) %><%= value %></label>
+      </div>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :writing, 'Do I want an epitaph or some type of text inscribed or included with my memorial marker(s)?' %>
+    <%= f.text_area :writing, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes, 'Notes' %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit 'Save', :class => 'btn btn-success' %>
+  </div>
+<% end %>

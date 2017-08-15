@@ -1,0 +1,8 @@
+if($('#photos_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#photos_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#photos_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#photos_panel').collapse('toggle');
+$('#photos_preloader').hide();

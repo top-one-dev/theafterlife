@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Possession</th>
+      <th>Person</th>
+      <th>Notes</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @possessions.each do |possession| %>
+      <tr>
+        <td><%= possession.what %></td>
+        <td><%= possession.who %></td>
+        <td><%= possession.notes %></td>
+        <td>
+          <%= link_to icon('pencil'), edit_members_last_wishes_possession_path(possession), :remote => true, :class => 'btn btn-success btn-xs' %>
+        </td>
+        <td>
+          <%= link_to icon('trash-o'), members_last_wishes_possession_path(possession), :method => :delete, :remote => true, :class => 'btn btn-danger btn-xs', :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="5" class="text-center">
+          <em>You haven't added any possession yet</em>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "Add New Possession", new_members_last_wishes_possession_path, :class => "btn btn-success", :remote => "true" %>

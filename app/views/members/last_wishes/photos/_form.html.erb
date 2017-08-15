@@ -1,0 +1,25 @@
+<%= form_for [:members, :last_wishes, @photo], :remote => true do |f| %>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">New Photo</h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <%= f.label :file_file_name, "File Name" %>
+    <%= f.text_field :file_file_name, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :caption %>
+    <%= f.text_field :caption, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="btn btn-success">
+      + Add Photo File
+      <%= file_field_tag :file, :class => 'btn btn-success', :style => "display:none" %>
+    </label>
+  </div>
+</div>
+<div class="modal-footer">
+  <%= f.submit :class => 'btn btn-success' %>
+</div>
+<% end %>

@@ -1,5 +1,5 @@
 <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
+  <div class="panel panel-default" id="burial_service">
     <div class="panel-heading">
       <h4 class="panel-title">
         <%= link_to members_last_wishes_burial_service_path, :remote => true, :id => "burial_service_link" do %>
@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="panel panel-default">
+  <div class="panel panel-default" id="science_donation">
     <div class="panel-heading">
       <h4 class="panel-title">
         <%= link_to members_last_wishes_science_donation_path, :remote => true, :id => "science_donation_link" do %>
@@ -34,7 +34,7 @@
   </div>
 
 
-  <div class="panel panel-default">
+  <div class="panel panel-default" id="cremation">
     <div class="panel-heading">
       <h4 class="panel-title">
         <%= link_to members_last_wishes_cremation_path, :remote => true, :id => "cremation_link" do %>
@@ -51,40 +51,3 @@
     </div>
   </div>
 </div>
-<script>
-$(function() {
-  var timeout;
-
-  $('#science_donation_link').on('click', function(){
-    if($('#science_donation_panel .panel-body').is(':hidden')) {
-      $('#science_donation_preloader').show();
-    }
-  });
-
-  $('#science_donation_panel').on('shown.bs.collapse', function(){
-    $('#science_donation_preloader').hide();
-  });
-
-
-  $('#cremation_link').on('click', function(){
-    if($('#cremation_panel .panel-body').is(':hidden')) {
-      $('#cremation_preloader').show();
-    }
-  });
-
-  $('#cremation_panel').on('shown.bs.collapse', function(){
-    $('#cremation_preloader').hide();
-  });
-
-
-  $('#burial_service_link').on('click', function(){
-    if($('#burial_service_panel .panel-body').is(':hidden')) {
-      $('#burial_service_preloader').show();
-    }
-  });
-
-  $('#burial_service_panel').on('shown.bs.collapse', function(){
-    $('#burial_service_preloader').hide();
-  });
-});
-</script>

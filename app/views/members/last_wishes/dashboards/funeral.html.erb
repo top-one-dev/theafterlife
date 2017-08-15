@@ -1,0 +1,20 @@
+<div class="panel-group" id="accordion">
+  <% ['visitation', 'funeral_service', 'reception', 'headstone', 'memorial_marker', 'memorial_contribution', 'program', 'transportation'].each do |section| %>
+  <div class="panel panel-default" id="<%= section %>">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= link_to({:controller => "members/last_wishes/"+section.pluralize, :action => "show"}, :remote => true, :id => section+"_link") do %>
+          <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
+          <%= section.gsub("_"," ").capitalize %>
+        <% end %>
+        <span class="accordion_preloader" id="<%= section %>_preloader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </span>                      
+      </h4>
+    </div>
+    <div id="<%= section %>_panel" class="panel-collapse collapse">
+      <div class="panel-body"></div>
+    </div>
+  </div>
+  <% end %>
+</div>

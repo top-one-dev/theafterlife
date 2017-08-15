@@ -1,0 +1,8 @@
+if($('#musics_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#musics_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#musics_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#musics_panel').collapse('toggle');
+$('#musics_preloader').hide();

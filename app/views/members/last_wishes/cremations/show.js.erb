@@ -5,3 +5,4 @@ if($('#cremation_panel .panel-body').is(':hidden')){
 }
 $('#cremation_panel .panel-body').html('<%= j render :partial =>"index" %>');
 $('#cremation_panel').collapse('toggle');
+$('#cremation_preloader').hide();

@@ -1,0 +1,36 @@
+<%= form_for [:members, :last_wishes, @headstone], :remote => true, :format => :js do |f| %>
+  <div class="form-group">
+    <%= f.label nil, "Do I want a headstone?" %>
+    <div>
+      <label class="radio-inline"><%= f.radio_button :enabled, true %> Yes</label>
+      <label class="radio-inline"><%= f.radio_button :enabled, false %> No</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :epitaph, 'What epitaph would I like inscribed on my headstone?' %>
+    <%= f.text_area :epitaph, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :individual, "Do I want to have an individual headstone?" %>
+    <%= f.select :individual, options_for_select([["Yes, individual headstone",true], ["No, companion headstone",false]], @headstone.individual), {}, :class=>"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :material, 'What material would I like my headstone to be made of?' %>
+    <%= f.text_field :material, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :flowers, 'Describe my flower preferences to be arranged with my headstone?' %>
+    <%= f.text_field :flowers, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :flower_vase, 'Do I want a vase add-on included with my headstone design?' %>
+    <%= f.text_field :flower_vase, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit 'Save', :class => 'btn btn-success' %>
+  </div>
+<% end %>

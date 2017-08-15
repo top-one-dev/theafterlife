@@ -1,0 +1,20 @@
+<%= form_for [:members, :last_wishes, @science_donation], :remote => true do |f| %>
+  <div class="form-group">
+    <%= f.label nil, "Do I want to donate my body to science?" %>
+    <div>
+      <label class="radio-inline"><%= f.radio_button :enabled, true %> Yes</label>
+      <label class="radio-inline"><%= f.radio_button :enabled, false %> No</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :organization_name %>
+    <%= f.text_field :organization_name, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit 'Save', :class => 'btn btn-success' %>
+  </div>
+<% end %>

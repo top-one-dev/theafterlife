@@ -1,0 +1,9 @@
+<% if @error.present? %>
+  $.growl.error({ title: 'Error!', message: "<%= j @error %>" });
+<% else %>
+  $.growl.notice({ title: 'Success!', message: "Memory has been updated" });
+  $('#modal').modal('hide');
+  $('#modal').on('hidden.bs.modal', function (e) {
+    $('#memories_panel .panel-body').html('<%= j render :partial =>"index" %>');
+  })
+<% end %>

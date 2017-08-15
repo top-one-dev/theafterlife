@@ -1,0 +1,29 @@
+<%= form_for [:members, :last_wishes, @music], :remote => true do |f| %>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">New Music</h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <%= f.label :artist%>
+    <%= f.text_field :artist, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :title, "Song Title" %>
+    <%= f.text_field :title, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :reason %>
+    <%= f.text_area :reason, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="btn btn-success">
+      + Add Music File
+      <%= file_field_tag :file, :class => 'btn btn-success', :style => "display:none" %>
+    </label>
+  </div>
+</div>
+<div class="modal-footer">
+  <%= f.submit :class => 'btn btn-success' %>
+</div>
+<% end %>

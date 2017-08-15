@@ -1,0 +1,23 @@
+<%= form_for [:members, :last_wishes, @memory], :remote => true do |f| %>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">New Memory</h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <%= f.label :heading %>
+    <%= f.text_field :heading, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :text %>
+    <%= f.text_area :text, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :class => 'form-control' %>
+  </div>
+</div>
+<div class="modal-footer">
+  <%= f.submit :class => 'btn btn-success' %>
+</div>
+<% end %>

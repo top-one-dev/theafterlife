@@ -1,0 +1,8 @@
+if($('#questionnaires_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#questionnaires_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#questionnaires_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#questionnaires_panel').collapse('toggle');
+$('#questionnaires_preloader').hide();

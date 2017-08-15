@@ -1,0 +1,18 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default" id="sensitive_infos">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= link_to members_last_wishes_sensitive_infos_path, :remote => true, :id => "sensitive_infos_link" do %>
+          <span class="toggle-icon glyphicon glyphicon-chevron-right"></span>
+          My Sensitive Info
+        <% end %>
+        <span class="accordion_preloader" id="sensitive_infos_preloader">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </span>
+      </h4>
+    </div>
+    <div id="sensitive_infos_panel" class="panel-collapse collapse">
+      <div class="panel-body"></div>
+    </div>
+  </div>
+</div>

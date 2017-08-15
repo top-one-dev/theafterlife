@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date Authored</th>
+      <th>Addressee</th>
+      <th>Letter Body</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @letters.each do |letter| %>
+      <tr>
+        <td><%= letter.date_of_creation %></td>
+        <td><%= letter.addressee %></td>
+        <td><%= letter.text %></td>
+        <td>
+          <%= link_to icon('pencil'), edit_members_last_wishes_letter_path(letter), :remote => true, :class => 'btn btn-success btn-xs' %>
+        </td>
+        <td>
+          <%= link_to icon('trash-o'), members_last_wishes_letter_path(letter), :method => :delete, :remote => true, :class => 'btn btn-danger btn-xs', :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="5" class="text-center">
+          <em>You haven't added any letter yet</em>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "Add New Letter", new_members_last_wishes_letter_path, :class => "btn btn-success", :remote => "true" %>

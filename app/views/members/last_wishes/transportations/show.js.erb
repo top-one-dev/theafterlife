@@ -1,0 +1,8 @@
+if($('#transportation_panel .panel-body').is(':hidden')){
+  $('.panel-collapse').not('#transportation_panel').each(function(){
+     $(this).collapse('hide');
+  });
+}
+$('#transportation_panel .panel-body').html('<%= j render :partial =>"index" %>');
+$('#transportation_panel').collapse('toggle');
+$('#transportation_preloader').hide();
