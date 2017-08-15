@@ -13,29 +13,34 @@ Rails.application.routes.draw do
       root :to => redirect('members/last_wishes/relationships')
       get 'relationships' => 'dashboards#relationships'
       get 'body' => 'dashboards#body'
-      get 'possessions' => 'dashboards#possessions'
+      get 'possession' => 'dashboards#possessions', :as => 'my_possessions'
       get 'funeral' => 'dashboards#funeral'
       get 'story' => 'dashboards#story'
       get 'files' => 'dashboards#files'
-      get 'sensitive_info' => 'dashboards#sensitive_info'
+      get 'my_sensitive_info' => 'dashboards#sensitive_info'
 
       resources :people
       resources :pets
       resources :possessions
-      resources :memorial_markers
-      resources :memorial_contribution
+      resource :memorial_marker
+      resource :memorial_contribution
       resources :member_files
       resources :letters
-      resources :musics
+      resources :musics do
+        get :play
+      end
       resources :writings
       resources :memories
       resources :photos
       resources :questionnaires
-      resources :sensitive_infos
+      resources :sensitive_infos do
+        get  'unlock' => 'sensitive_infos#unlock'
+        post 'unlock' => 'sensitive_infos#confirm_unlock'
+      end
 
-      resource :science_donation, :only => [:show, :edit, :update]
-      resource :cremation, :only => [:show, :edit, :update]
-      resource :burial_service, :only => [:show, :edit, :update]
+      resource :science_donation, :only => [:show, :update]
+      resource :cremation, :only => [:show, :update]
+      resource :burial_service, :only => [:show, :update]
       resource :funeral_service, :only => [:show, :edit, :update]
       resource :reception, :only => [:show, :edit, :update]
       resource :headstone, :only => [:show, :edit, :update]
@@ -47,11 +52,13 @@ Rails.application.routes.draw do
 
     namespace :save do
       resources :deposits, :except => [:edit, :update] do 
-        post 'pay'
+        post 'pay_stripe'
+        get 'pay_coinbase'
       end
       resources :plans, :only => [:new, :create] do
         get 'cancel'
-        post 'pay'
+        post 'pay_stripe'
+        get 'pay_coinbase'
       end
     end
   end
