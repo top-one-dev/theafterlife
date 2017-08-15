@@ -39,6 +39,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (8.0.0)
+    attr_encrypted (3.0.3)
+      encryptor (~> 3.0.0)
     autoprefixer-rails (7.1.1.2)
       execjs
     bcrypt (3.1.11)
@@ -46,6 +48,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-select-rails (1.12.1)
     builder (3.2.3)
     byebug (9.0.6)
     climate_control (0.2.0)
@@ -71,6 +74,7 @@ GEM
       rails (>= 4, < 6)
       will_paginate (~> 3.1)
       will_paginate-bootstrap (~> 1)
+    encryptor (3.0.0)
     erubi (1.6.1)
     execjs (2.7.0)
     faraday (0.12.1)
@@ -222,7 +226,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_encrypted (~> 3.0.0)
   bootstrap-sass
+  bootstrap-select-rails
   byebug
   coffee-rails (~> 4.2)
   coinbase
@@ -250,4 +256,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.11.2
+   1.15.3
