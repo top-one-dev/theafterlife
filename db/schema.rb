@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711220022) do
+ActiveRecord::Schema.define(version: 20170815200947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,10 +64,11 @@ ActiveRecord::Schema.define(version: 20170711220022) do
     t.bigint "member_id"
     t.boolean "enabled"
     t.string "plot"
-    t.boolean "symbolic_goodbye"
+    t.string "symbolic_marker"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "coffin_selection"
     t.index ["member_id"], name: "index_burial_services_on_member_id"
   end
 
@@ -107,6 +108,7 @@ ActiveRecord::Schema.define(version: 20170711220022) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "flowers"
     t.index ["member_id"], name: "index_headstones_on_member_id"
   end
 
@@ -116,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170711220022) do
     t.date "date_of_creation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "addressee"
     t.index ["member_id"], name: "index_letters_on_member_id"
   end
 
@@ -340,6 +343,7 @@ ActiveRecord::Schema.define(version: 20170711220022) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "public"
     t.index ["member_id"], name: "index_receptions_on_member_id"
   end
 
@@ -363,10 +367,11 @@ ActiveRecord::Schema.define(version: 20170711220022) do
     t.bigint "member_id"
     t.string "info_type"
     t.string "title"
-    t.string "instruction"
+    t.string "encrypted_instruction"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_instruction_iv"
     t.index ["member_id"], name: "index_sensitive_infos_on_member_id"
   end
 
